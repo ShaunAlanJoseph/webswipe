@@ -1,0 +1,33 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Raw data, recordings and session logs stay local (see data/README.md)
+data/*
+!data/README.md
+!data/lexicon_10k.txt
+!data/phrases.txt
+
+# Only the four final models are tracked; experiment and intermediate weights stay local
+models/*
+!models/gesture_lighting_20261010.onnx
+!models/gesture_crop_20261010.onnx
+!models/decoder_personalized_20261010.pt
+!models/hand_landmarker.task
+checkpoints/
+runs/
+kaggle_build/
+colab_bundle.zip
+
+# LaTeX build output
+docs/report/*.aux
+docs/report/*.bbl
+docs/report/*.blg
+docs/report/*.log
+docs/report/*.out
+docs/report/*.spl
+docs/report/*.pdf
+
+# Recording kit: the hand model is copied in from models/ before the kit is shared
+tools/recording_kit/models/
