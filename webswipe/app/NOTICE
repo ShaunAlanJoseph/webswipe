@@ -1,0 +1,8 @@
+Parts of this directory are derived from kinivi/hand-gesture-recognition-mediapipe
+(https://github.com/kinivi/hand-gesture-recognition-mediapipe), Apache License 2.0 (see LICENSE-kinivi).
+
+- cvfpscalc.py: copied unchanged.
+- draw.py: draw_landmarks rewritten compactly from the original app.py (same style and connections).
+- main.py: capture loop, mode switching and logging structure follow the original app.py.
+  Changed: ported from mp.solutions.hands to the MediaPipe Tasks HandLandmarker API; the gesture
+  classifiers were replaced by the WebSwipe keyboard, pinch detector, trace recorder and decoder.
