@@ -50,6 +50,15 @@ def resample_index(c, n=N_POINTS):
     return np.stack([np.interp(t, i, c[:, 0]), np.interp(t, i, c[:, 1])], 1)
 
 
+def resample_time(coords, t_ms, hz=50.0):
+    """Interpolate a trace onto a uniform clock, so frame-based filters see the training-time rate."""
+    c, t = np.asarray(coords, float), np.asarray(t_ms, float)
+    if len(c) < 2 or t[-1] <= t[0]:
+        return c
+    ft = np.arange(t[0], t[-1] + 1e-9, 1000.0 / hz)
+    return np.stack([np.interp(ft, t, c[:, k]) for k in range(c.shape[1])], 1)
+
+
 def shape_features(s):
     prev = np.vstack([s[:1], s[:-1]])
     nxt = np.vstack([s[1:], s[-1:]])

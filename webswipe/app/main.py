@@ -21,6 +21,8 @@ def get_args():
     ap.add_argument("--phrases", default="data/phrases.txt")
     ap.add_argument("--ckpt", help="decoder checkpoint (type mode)")
     ap.add_argument("--lexicon", default="data/shen_features.npz")
+    ap.add_argument("--prior-weight", type=float, default=0.0, help="wordfreq unigram prior weight (0 = off)")
+    ap.add_argument("--resample-hz", type=float, default=0.0, help="resample traces to this rate before decoding")
     ap.add_argument("--camera", type=int, default=0)
     ap.add_argument("--width", type=int, default=640)
     ap.add_argument("--height", type=int, default=480)
@@ -75,7 +77,7 @@ def main():
     decoder = None
     if a.mode == "type" and a.ckpt:
         from webswipe.decoder.live import LiveDecoder, load_lexicon
-        decoder = LiveDecoder(a.ckpt, load_lexicon(a.lexicon))
+        decoder = LiveDecoder(a.ckpt, load_lexicon(a.lexicon), a.prior_weight, a.resample_hz)
     rec = Recorder(a.participant) if a.mode == "record" else None
     sess = Session(a.phrases) if a.mode == "record" else None
 
@@ -95,7 +97,7 @@ def main():
         on, ratio = False, None
         if dom is not None:
             on, ratio = pinch.update(dom.px)
-            cur = smooth(pinch_point(dom.px))
+            cur = smooth(pinch_point(dom.px), t_ms / 1000)
         else:
             pinch.reset_state(); smooth.reset()
 

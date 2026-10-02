@@ -7,8 +7,9 @@ from pathlib import Path
 import numpy as np
 import torch
 
+from .augment import random_webcam
 from .decode import Lexicon, greedy, lexicon_accuracy
-from .features import encode_word
+from .features import Keyboard, encode_word, featurize
 from .model import ShenDecoder, ctc_loss
 
 
@@ -81,6 +82,9 @@ def main():
     ap.add_argument("--eval-every", type=int, default=5)
     ap.add_argument("--out", default="checkpoints/shen_d1.pt")
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--aug-prob", type=float, default=0.0,
+                    help="fraction of training gestures re-featurised from a webcam-like degraded trace")
+    ap.add_argument("--aug-pkl", default="data/shen_midair.pkl", help="raw D1 traces, same order as the npz")
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     a = ap.parse_args()
 
@@ -91,6 +95,11 @@ def main():
     if a.max_train:
         tr = tr[:a.max_train]
     lex = Lexicon(sorted(set(W)))
+    recs = None
+    if a.aug_prob > 0:
+        from .shen_data import load_words
+        recs = load_words(a.aug_pkl)
+        assert len(recs) == len(W) and all(r["word"] == w for r, w in zip(recs, W)), "npz/pkl order mismatch"
     print(f"train {len(tr)}  val {len(va)}  lexicon {len(lex.words)}  device {a.device}")
 
     model = ShenDecoder().to(a.device)
@@ -108,7 +117,16 @@ def main():
         t0, tot = time.time(), 0.0
         for b in batches(tr, a.batch, True, rng):
             t, tl = targets(W[b])
-            loss = ctc_loss(model(torch.from_numpy(X[b]).to(a.device)), t.to(a.device), tl.to(a.device))
+            xb = X[b]
+            if recs is not None:
+                xb = xb.copy()
+                for i, j in enumerate(b):
+                    if rng.random() < a.aug_prob:
+                        kb = Keyboard.shen(recs[j]["candidate"])
+                        f = featurize(random_webcam(rng)(recs[j]["coords"], recs[j]["t_ms"], kb.key_w, rng), kb)
+                        if f is not None:
+                            xb[i] = f
+            loss = ctc_loss(model(torch.from_numpy(xb).to(a.device)), t.to(a.device), tl.to(a.device))
             opt.zero_grad(); loss.backward(); opt.step()
             tot += loss.item() * len(b)
         row = {"epoch": ep, "train_loss": tot / len(tr), "sec": round(time.time() - t0, 1)}
@@ -119,6 +137,9 @@ def main():
                 torch.save({"model": model.state_dict(), "args": vars(a), "epoch": ep, "metrics": row}, a.out)
         hist.append(row)
         print(json.dumps(row), flush=True)
+    # the best-on-val checkpoint is optimistic when val is the test subject; keep the last epoch too
+    torch.save({"model": model.state_dict(), "args": vars(a), "epoch": a.epochs, "metrics": hist[-1]},
+               Path(a.out).with_name(Path(a.out).stem + "_last.pt"))
     Path(a.out).with_suffix(".json").write_text(json.dumps({"args": vars(a), "history": hist}, indent=1))
     print(f"best val top-1 {best:.3f} -> {a.out}")
 

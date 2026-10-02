@@ -20,13 +20,25 @@ python -m webswipe.decoder.train --epochs 200             # random 95/5 split, a
 python -m webswipe.decoder.train --split subject --test-subject 0:3   # leave one subject out
 python -m webswipe.decoder.train --data data/webcam_features.npz --init checkpoints/shen_d1.pt --lr 3e-5
 ```
+Webcam-like augmentation during training (domain randomisation over frame rate, jitter, pinch timing):
+`--aug-prob 0.5`. Webcam recordings -> features: `python -m webswipe.decoder.webcam_data --resample-hz 50`.
+
 GPU training: `tools/make_colab_bundle.sh`, upload `colab_bundle.zip` to Drive, run `notebooks/train_decoder_colab.ipynb`.
+
+## Evaluation (D1, leave-one-subject-out; see `results/README.md`)
+```
+pip install wordfreq                                       # unigram prior, independent of the study data
+python -m webswipe.eval.shark2_d1                          # SHARK2 baseline, tuned on the other subjects
+python -m webswipe.eval.robustness_d1 --resample-hz 50 --ckpt clean=checkpoints/d1_loso0_clean_last.pt
+python -m webswipe.eval.lm_prior_d1 --resample-hz 50 --ckpt clean=checkpoints/d1_loso0_clean_last.pt
+python -m webswipe.eval.plot_robustness
+```
 
 ## Live app
 ```
 python tools/make_phrases.py                                          # phrase list for recording
 python -m webswipe.app.main --mode record --participant shaun         # record webcam dataset
-python -m webswipe.app.main --ckpt checkpoints/shen_d1.pt             # live typing
+python -m webswipe.app.main --ckpt checkpoints/shen_d1.pt --prior-weight 0.5 --resample-hz 50   # live typing
 ```
 Dominant hand: pinch thumb and index, trace the word, release. Other hand: pinch to delete the last word
 (typing) or skip the word (recording). Keys: `q` quit, `b` delete, `n` skip.

@@ -15,7 +15,7 @@ def load_words(pkl):
         phrase, sugg = row["phrase"], row["word suggestions"]
         if len(phrase) != len(sugg):
             continue
-        for word, coords, s in zip(phrase, row["lift on coords"], sugg):
+        for word, coords, ts, s in zip(phrase, row["lift on coords"], row["lift on time steps"], sugg):
             # original kept a gesture only if the target word was among the suggestions
             if word not in s or len(coords) < 4:
                 continue
@@ -23,7 +23,8 @@ def load_words(pkl):
             if not word or any(ch not in LETTERS for ch in word):
                 continue  # original mapped apostrophes etc. to 'a'; we drop them
             recs.append({"subject": int(row["subject id"]), "candidate": int(row["candidate id"]),
-                         "word": word, "coords": np.asarray(coords, float)[:, :2]})
+                         "word": word, "coords": np.asarray(coords, float)[:, :2],
+                         "t_ms": np.asarray(ts, float)})
     return recs
 
 
