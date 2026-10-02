@@ -48,6 +48,24 @@ def test_live_decoder_prior_and_resample(tmp_path):
     assert len(cands) == 4 and set(cands) <= set(WORDS) and ms > 0
 
 
+def test_live_shark2_on_overlay_trace():
+    from webswipe.app.keyboard_ui import KeyboardOverlay
+    from webswipe.decoder.live import LiveShark2
+    ui = KeyboardOverlay(640, 480)
+    lex = WORDS + ["hell", "jello", "word", "quit", "zebras"]
+    rng = np.random.default_rng(0)
+    for prior in [0.0, 0.25]:
+        dec = LiveShark2(lex, prior_weight=prior)
+        for w in WORDS:
+            c, t = ideal(w, ui.kb, hz=12)  # webcam rate, overlay geometry
+            c = c + rng.normal(0, 0.1 * ui.kb.key_w, c.shape)
+            cands, ms = dec(np.column_stack([c, t]), ui.kb)
+            assert len(cands) == 4 and ms < 100
+            # without a prior the shape decides; with it, a frequent neighbour may win (help > hello)
+            # but the intended word must stay among the candidates the user can pick
+            assert cands[0] == w if prior == 0 else w in cands
+
+
 def test_recordings_to_features(tmp_path):
     from webswipe.app.keyboard_ui import KeyboardOverlay
     from webswipe.app.recorder import Recorder

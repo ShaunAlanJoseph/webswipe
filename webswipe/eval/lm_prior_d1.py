@@ -53,6 +53,7 @@ def main():
     ap.add_argument("--conditions", nargs="+", default=["clean (50 Hz)", "webcam: 12 fps + 0.15 + 100 ms"])
     ap.add_argument("--n-tune", type=int, default=1500)
     ap.add_argument("--resample-hz", type=float, default=0.0, help="uniform-clock resampling for every decoder")
+    ap.add_argument("--max-test", type=int, default=0, help="smoke test: only the first n test gestures")
     ap.add_argument("--out", default="results/lm_prior_d1.json")
     a = ap.parse_args()
 
@@ -61,6 +62,7 @@ def main():
     widx = {w: i for i, w in enumerate(words)}
     lp = unigram_logprior(words)
     test = [r for r in recs if r["subject"] == a.test_subject]
+    test = test[:a.max_test] if a.max_test else test
     tgt = np.array([widx[r["word"]] for r in test])
     shark = Shark2(words, norm="rms", smooth=True)
     ss, sl = 0.64, 0.25

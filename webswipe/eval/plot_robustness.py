@@ -16,10 +16,17 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", default="results/robustness_d1.json")
     ap.add_argument("--out", default="results/robustness_d1.png")
+    ap.add_argument("--series", nargs="*", help="decoder names to plot (max 4)")
     a = ap.parse_args()
     res = json.load(open(a.json))
     conds = list(res["conditions"])
     decoders = list(res["conditions"][conds[0]])
+    if a.series:
+        decoders = a.series
+    elif len(decoders) > len(COLORS):  # with --resample-hz, show the resampled variants (the deployed setting)
+        decoders = [d for d in decoders if d.endswith("Hz")] or decoders
+    if len(decoders) > len(COLORS):
+        raise SystemExit(f"at most {len(COLORS)} series, got {decoders}; pick some with --series")
     n, m = len(conds), len(decoders)
     h = 0.8 / m
 

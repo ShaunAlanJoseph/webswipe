@@ -75,12 +75,14 @@ def main():
                     help="shape, location sigma tuned on other subjects (results/shark2_d1.json, rms)")
     ap.add_argument("--resample-hz", type=float, default=0.0,
                     help="also evaluate every decoder on traces resampled to this rate (variant suffix '@Hz')")
+    ap.add_argument("--max-test", type=int, default=0, help="smoke test: only the first n test gestures")
     ap.add_argument("--out", default="results/robustness_d1.json")
     a = ap.parse_args()
 
     recs = load_words(a.pkl)
     words = sorted({r["word"] for r in recs})
     test = [r for r in recs if r["subject"] == a.test_subject]
+    test = test[:a.max_test] if a.max_test else test
     lex = Lexicon(words)
     sharks = {"SHARK2": Shark2(words, norm="rms"), "SHARK2+smooth": Shark2(words, norm="rms", smooth=True)}
     models = {}

@@ -47,7 +47,10 @@ SHARK2 rows (top-1 %). `@50Hz` = trace re-sampled onto a uniform 50 Hz clock bef
   and is the best or near-best SHARK2 variant everywhere (D1 itself mixes 10 and 20 ms frame gaps).
   → "SHARK2 + smoothing @50Hz" is the strong baseline the neural decoder has to beat.
 
-NEURAL_ROBUSTNESS_PLACEHOLDER
+**Neural rows: pending the GPU run** (`notebooks/train_decoder_colab.ipynb`, sections 1-2). Two models,
+same budget and held-out subject: `clean` (as in Shen et al.) vs `aug` (`--aug-prob 0.5`). The question is
+whether `aug@50Hz` beats `SHARK2+smooth@50Hz` on the webcam/harsh rows without losing on clean.
+A first CPU attempt (20 epochs) was abandoned: ~5 min/epoch on the shared laptop.
 
 ## 3. Word-frequency prior (`webswipe/eval/lm_prior_d1.py`, `webswipe/decoder/lm.py`)
 Unigram prior from `wordfreq` (general English, independent of D1). score = log-likelihood + λ · log p(word).
@@ -58,9 +61,19 @@ SHARK2's λ tuned on the other subjects: λ = 0.5.
 | clean | 72.5 | 81.5 | **84.2** | 83.9 | 78.0 |
 | webcam preset | 70.7 | 76.3 | **77.7** | 75.8 | 69.5 |
 
-NEURAL_PRIOR_PLACEHOLDER
+With 50 Hz resampling (`results/lm_prior_d1_shark2_rs50.json`), SHARK2 + smoothing + prior (λ = 0.5):
+**84.6** clean, **81.0** webcam preset. This is the strongest baseline so far.
+
+**Accuracy vs reachability.** The D1-optimal λ = 0.5 is tuned on D1's phrases, which are mostly common
+words. On the live overlay it makes 7.8% of the 1,996-word lexicon impossible to get as top-1 *even with a
+perfect swipe* (bank→back, beer→be; 0.3% not even in the top 4). At λ = 0.25: 3.6% not top-1, every word
+within the top 3, for −2.4 / −1.7 points on D1 (clean / webcam). With λ = 0: 16 words (identical paths, e.g.
+met/meet). The live app therefore uses λ = 0.25 plus candidate selection with the other hand.
+
+**Neural + prior: pending the GPU run.** The neural decoder's λ cannot be tuned on its own training subjects
+(overfit logits); report the full λ curve, and fix λ on a second held-out subject before quoting one number.
 
 ## Caveats
 - D1 is headset data. The webcam conditions are simulated degradations, not real webcam traces; D3 is needed.
 - One held-out subject; the other 8 should be rotated through for the final report (needs GPU).
-- Neural models here are short CPU runs (20 epochs); the original trains for 200.
+- Neural models are trained on Colab/Kaggle (100 epochs in the notebook; the original trains for 200).

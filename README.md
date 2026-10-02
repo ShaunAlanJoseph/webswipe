@@ -23,7 +23,9 @@ python -m webswipe.decoder.train --data data/webcam_features.npz --init checkpoi
 Webcam-like augmentation during training (domain randomisation over frame rate, jitter, pinch timing):
 `--aug-prob 0.5`. Webcam recordings -> features: `python -m webswipe.decoder.webcam_data --resample-hz 50`.
 
-GPU training: `tools/make_colab_bundle.sh`, upload `colab_bundle.zip` to Drive, run `notebooks/train_decoder_colab.ipynb`.
+GPU training and all evaluations (do not train on the laptop): `bash tools/make_colab_bundle.sh`, then run
+`notebooks/train_decoder_colab.ipynb` on Colab (bundle in `MyDrive/webswipe/`) or Kaggle (bundle as a dataset);
+the first cell detects which. Setup steps are in the notebook's first cell.
 
 ## Evaluation (D1, leave-one-subject-out; see `results/README.md`)
 ```
@@ -37,11 +39,20 @@ python -m webswipe.eval.plot_robustness
 ## Live app
 ```
 python tools/make_phrases.py                                          # phrase list for recording
-python -m webswipe.app.main --mode record --participant shaun         # record webcam dataset
-python -m webswipe.app.main --ckpt checkpoints/shen_d1.pt --prior-weight 0.5 --resample-hz 50   # live typing
+python -m webswipe.app.main --mode record --participant shaun         # record webcam dataset (resumes
+                                                                      #   after this participant's last phrase)
+python tools/check_recordings.py                                      # per-participant report + flagged gestures
+python -m webswipe.app.main                                           # live typing, SHARK2 (no model needed)
+python -m webswipe.app.main --ckpt checkpoints/d1_loso0_aug_last.pt --prior-weight 0.25 --resample-hz 50   # neural
+python -m webswipe.app.main --mode tap --autocorrect                  # per-key baseline for the user study
+python -m webswipe.app.main --participant shaun --log                 # any typing mode: events -> data/sessions/
 ```
-Dominant hand: pinch thumb and index, trace the word, release. Other hand: pinch to delete the last word
-(typing) or skip the word (recording). Keys: `q` quit, `b` delete, `n` skip.
+Tap mode: pinch on a key = that letter; other hand short pinch = space (word snapped to the lexicon with
+`--autocorrect`), hold = backspace.
+Dominant hand: pinch thumb and index, trace the word, release (a swipe survives tracking dropouts up to
+200 ms). Other hand: short pinch = swap the last word for the next candidate, hold (0.6 s) = delete it;
+in recording mode any other-hand pinch skips the word. Keys: `1`-`4` pick a candidate, `b` delete,
+`n` skip, `q` quit. SHARK2 defaults: smoothing, 50 Hz, prior 0.25 (see `results/README.md`).
 
 ## Tests
 ```
