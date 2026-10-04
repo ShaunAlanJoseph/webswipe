@@ -70,4 +70,6 @@ Training: Colab / Kaggle free GPUs.
 - Done: SHARK2 baseline + webcam-degradation robustness + word-frequency prior on D1 (`results/README.md`);
   training augmentation; Colab/Kaggle notebook + bundle; live app: SHARK2 default, dropout tolerance,
   candidate selection, tap mode, event log; recording resume + checker; paper Sec. 3-4 revision (`paper/`).
-- Next (needs people/GPU): run the notebook (clean vs aug), record D3, fine-tune, user study.
+- Oct 5: neural decoders trained and evaluated on Kaggle for all 9 held-out D1 subjects (`results/README.md` sec. 4):
+  aug beats clean by +8.3 top-1 on the webcam preset on 9/9 subjects; both beat SHARK2.
+- Next (needs people): record D3, fine-tune (`tools/kaggle/push.py`), user study.

@@ -47,10 +47,14 @@ SHARK2 rows (top-1 %). `@50Hz` = trace re-sampled onto a uniform 50 Hz clock bef
   and is the best or near-best SHARK2 variant everywhere (D1 itself mixes 10 and 20 ms frame gaps).
   → "SHARK2 + smoothing @50Hz" is the strong baseline the neural decoder has to beat.
 
-**Neural rows: pending the GPU run** (`notebooks/train_decoder_colab.ipynb`, sections 1-2). Two models,
-same budget and held-out subject: `clean` (as in Shen et al.) vs `aug` (`--aug-prob 0.5`). The question is
-whether `aug@50Hz` beats `SHARK2+smooth@50Hz` on the webcam/harsh rows without losing on clean.
-A first CPU attempt (20 epochs) was abandoned: ~5 min/epoch on the shared laptop.
+**Neural rows (Kaggle, Oct 4-5):** see section 4 for all 9 held-out subjects. Subject 0, top-1 @50Hz:
+
+| Condition | SHARK2+smooth | clean | aug |
+|---|---|---|---|
+| clean (50 Hz) | 73.2 | **96.0** | 95.8 |
+| jitter 0.3 | 57.4 | 94.5 | **95.8** |
+| webcam: 12 fps + 0.15 + 100 ms | 73.3 | 89.1 | **92.8** |
+| harsh: 10 fps + 0.3 + 100 ms | 63.8 | 84.1 | **88.9** |
 
 ## 3. Word-frequency prior (`webswipe/eval/lm_prior_d1.py`, `webswipe/decoder/lm.py`)
 Unigram prior from `wordfreq` (general English, independent of D1). score = log-likelihood + λ · log p(word).
@@ -70,10 +74,39 @@ perfect swipe* (bank→back, beer→be; 0.3% not even in the top 4). At λ = 0.2
 within the top 3, for −2.4 / −1.7 points on D1 (clean / webcam). With λ = 0: 16 words (identical paths, e.g.
 met/meet). The live app therefore uses λ = 0.25 plus candidate selection with the other hand.
 
-**Neural + prior: pending the GPU run.** The neural decoder's λ cannot be tuned on its own training subjects
-(overfit logits); report the full λ curve, and fix λ on a second held-out subject before quoting one number.
+**Neural + prior (section 4):** the prior does **not** help the neural decoders: λ = 0 is best or tied for
+both models in both conditions (all 9 subjects). The CTC model already prefers frequent words from its
+training data; the prior only matters for SHARK2.
+
+## 4. Leave-one-subject-out over all 9 D1 subjects (Kaggle, Oct 4-5)
+Each subject held out in turn; `clean` and `aug` trained on the other 8 (100 epochs, last epoch reported),
+SHARK2 sigmas and λ tuned on the other 8. Full tables: `loso_summary.md` (9 subjects),
+`loso_summary_excl9.md` (without subject 9); per subject: `*_s<id>.json`, `robustness_d1_s<id>.png`.
+Top-1 %, mean ± sd over held-out subjects, every decoder @50Hz:
+
+| Condition | SHARK2+smooth | clean | aug | aug > clean |
+|---|---|---|---|---|
+| clean (50 Hz), 9 subjects | 67.8 ± 20.3 | 86.3 ± 12.9 | 86.6 ± 15.9 | 4/9 |
+| webcam preset, 9 subjects | 69.0 ± 9.1 | 74.6 ± 12.5 | **82.9 ± 10.0** | **9/9** |
+| harsh preset, 9 subjects | 61.3 ± 7.8 | 69.3 ± 13.4 | **78.5 ± 11.3** | **9/9** |
+| clean (50 Hz), without subject 9 | 74.5 ± 1.4 | 90.5 ± 3.2 | 91.8 ± 2.6 | 4/8 |
+| webcam preset, without subject 9 | 70.6 ± 8.4 | 75.6 ± 13.0 | **83.4 ± 10.6** | 8/8 |
+
+- **Neural beats SHARK2 everywhere**, by ~16 points on clean traces and ~14 on the webcam preset (aug).
+- **Augmentation is the main result:** +8.3 (webcam) and +9.2 (harsh) points over `clean`, better on
+  **every** held-out subject, while costing nothing on clean traces (+0.3 on average, 4/9 subjects).
+- With the prior, SHARK2 reaches 77.1 ± 7.4 on the webcam preset (tuned λ), still 5.8 points below `aug`
+  without a prior.
+- **Subject 9 is an outlier in the data, not the models.** Its traces were recorded ~2 months before the
+  others, average 26 ms/frame (others 16.7), and 94.6% of them contain a single-frame jump of more than one
+  key width (others 16-28%); path length is 1.63× the ideal key path (others 1.3-1.4×). SHARK2 gets 13.8%
+  on it, and 50 Hz resampling drops the neural models from 87.0/86.0 (raw) to 52.7/44.8. Report the
+  9-subject numbers and give the 8-subject ones as a sensitivity check.
+
+**Reproduction of Shen et al.** (random 95/5 split, 200 epochs, as in their code; `shen_d1_random.json`):
+92.2% top-1 / 97.3% top-4 at the last epoch (best 93.2%). Compare against the number reported in the paper
+before quoting it.
 
 ## Caveats
 - D1 is headset data. The webcam conditions are simulated degradations, not real webcam traces; D3 is needed.
-- One held-out subject; the other 8 should be rotated through for the final report (needs GPU).
-- Neural models are trained on Colab/Kaggle (100 epochs in the notebook; the original trains for 200).
+- Neural LOSO models are trained for 100 epochs (the original trains for 200); one seed per model.

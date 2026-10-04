@@ -1,0 +1,32 @@
+{
+ "lexicon": 1996,
+ "test_subject": 6,
+ "n_test": 1178,
+ "bbox": {
+  "sigma_shape": 0.32,
+  "sigma_loc": 0.25,
+  "tune_top1": 0.6513333333333333,
+  "top1": 0.7512733446519525,
+  "top4": 0.9923599320882852,
+  "shape_only_top1": 0.44482173174872663,
+  "location_only_top1": 0.7504244482173175
+ },
+ "rms": {
+  "sigma_shape": 0.32,
+  "sigma_loc": 0.25,
+  "tune_top1": 0.6513333333333333,
+  "top1": 0.7393887945670629,
+  "top4": 0.9881154499151104,
+  "shape_only_top1": 0.4541595925297114,
+  "location_only_top1": 0.7504244482173175
+ },
+ "rms+smooth": {
+  "sigma_shape": Infinity,
+  "sigma_loc": 0.25,
+  "tune_top1": 0.6753333333333333,
+  "top1": 0.7707979626485568,
+  "top4": 0.9949066213921901,
+  "shape_only_top1": 0.46519524617996605,
+  "location_only_top1": 0.7707979626485568
+ }
+}
