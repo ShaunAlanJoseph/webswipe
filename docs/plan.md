@@ -37,7 +37,7 @@ Training stages: D1 (+D2) pretrain -> fine-tune on D3 (3 users) -> test on held-
 | Comparison | Shows |
 |---|---|
 | SHARK2 template decoder | classic baseline |
-| FUTO Swipe (released weights, zero-shot) | strongest off-the-shelf model |
+| FUTO Swipe (released weights, zero-shot) — optional, see note | strongest off-the-shelf model |
 | Shen model trained on D1, no fine-tune | base paper as-is on webcam data |
 | Shen model trained on D3 only | value of pretraining |
 | Ours: D1(+D2) -> D3 fine-tuned | main result |
@@ -60,3 +60,14 @@ Training: Colab / Kaggle free GPUs.
 ## Notes
 - The Shen repo has no licence: academic use with citation; consider emailing the authors.
 - Gesture2Text and RingGesture have no public code, so they are cited, not compared.
+- FUTO (checked Oct 2, swipe.futo.tech): dataset huggingface.co/datasets/futo-org/swipe.futo.org is MIT
+  (1M QWERTY swipes) -> fine for D2. Model weights huggingface.co/futo-org/futo-swipe are under a custom
+  "FUTO Model License" (read the terms before benchmarking/publishing); inference is a C++ GPL library
+  (gitlab.futo.org/keyboard/swipe-library) with no Python bindings and an undocumented input format.
+  Zero-shot FUTO is therefore optional: only if time allows after the main results.
+
+## Status (Oct 2, branch webswipe-eval)
+- Done: SHARK2 baseline + webcam-degradation robustness + word-frequency prior on D1 (`results/README.md`);
+  training augmentation; Colab/Kaggle notebook + bundle; live app: SHARK2 default, dropout tolerance,
+  candidate selection, tap mode, event log; recording resume + checker; paper Sec. 3-4 revision (`paper/`).
+- Next (needs people/GPU): run the notebook (clean vs aug), record D3, fine-tune, user study.

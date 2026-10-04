@@ -26,6 +26,9 @@ Webcam-like augmentation during training (domain randomisation over frame rate, 
 GPU training and all evaluations (do not train on the laptop): `bash tools/make_colab_bundle.sh`, then run
 `notebooks/train_decoder_colab.ipynb` on Colab (bundle in `MyDrive/webswipe/`) or Kaggle (bundle as a dataset);
 the first cell detects which. Setup steps are in the notebook's first cell.
+Headless alternative (Kaggle CLI, token in `~/.kaggle`): `python tools/kaggle/push.py bundle` uploads the bundle
+as a private dataset, `python tools/kaggle/push.py train:0` runs `tools/kaggle/runner.py` as a private GPU
+kernel (`smoke`, `train:<subjects>`, `repro`, `eval:<subjects> --cpu --after train:<subjects>`).
 
 ## Evaluation (D1, leave-one-subject-out; see `results/README.md`)
 ```
