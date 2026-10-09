@@ -2,9 +2,10 @@
 #   python tools/kaggle/push_vision.py frames s1 s2          # create or version shauniiitk/webswipe-frames
 #   python tools/kaggle/push_vision.py run smoke --cpu --smoke --folds A:s1:s2
 #   python tools/kaggle/push_vision.py run xloc --folds A:s1:s2 B:s2:s1 --imgsz 320
-# Fold syntax: name:train_sessions:test_sessions, sessions joined with '+'.
+# Fold syntax: name:train_sessions:test_sessions, sessions joined with '+'; empty test = final model (HaGRID val only).
 # Status / outputs: kaggle kernels status <id>; kaggle kernels output <id> -p <dir>
 import argparse
+import os
 import json
 import shutil
 import subprocess
@@ -14,7 +15,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 BUILD = ROOT / "kaggle_build"
 KAGGLE = str(ROOT / ".venv/bin/kaggle")
-USER = "shauniiitk"
+# another account (e.g. a teammate's quota): KAGGLE_CONFIG_DIR=<dir with their access token> KAGGLE_USER=<name>
+USER = os.environ.get("KAGGLE_USER", "shauniiitk")
 DATASET = f"{USER}/webswipe-frames"
 HAGRID = "innominate817/hagrid-sample-30k-384p"
 BASE = ROOT / "models/hagrid/YOLOv10n_gestures.pt"
@@ -49,8 +51,9 @@ def run(a):
     folds = []
     for f in a.folds:
         name, tr, te = f.split(":")
-        folds.append({"name": name, "train": tr.split("+"), "test": te.split("+")})
-    cfg = {"folds": folds, "mixes": a.mixes, "imgsz": a.imgsz, "epochs": a.epochs, "seed": a.seed, "smoke": a.smoke}
+        folds.append({"name": name, "train": tr.split("+"), "test": [t for t in te.split("+") if t]})
+    cfg = {"folds": folds, "mixes": a.mixes, "imgsz": a.imgsz, "epochs": a.epochs, "seed": a.seed, "smoke": a.smoke,
+           "max_hours": a.max_hours}
     slug = f"webswipe-vision-{a.name}"
     d = BUILD / slug
     d.mkdir(parents=True, exist_ok=True)
@@ -81,6 +84,7 @@ if __name__ == "__main__":
     r.add_argument("--seed", type=int, default=0)
     r.add_argument("--cpu", action="store_true")
     r.add_argument("--smoke", action="store_true")
+    r.add_argument("--max-hours", type=float, default=2.0, help="skip trainings after this many hours; watchdog kills the kernel 15 min later")
     r.add_argument("--no-hagrid-mount", action="store_true", help="use hagrid_subset.zip from our dataset instead")
     a = ap.parse_args()
     frames(a.sessions) if a.cmd == "frames" else run(a)

@@ -25,5 +25,12 @@ def draw_trace(img, pts, color=(0, 200, 255)):
 
 
 def text(img, s, org, scale=0.6, color=(255, 255, 255), thick=1):
-    cv.putText(img, s, org, cv.FONT_HERSHEY_SIMPLEX, scale, (0, 0, 0), thick + 3, cv.LINE_AA)
+    """Plain text on a darkened band behind it (an outline made small text unreadable)."""
+    (w, h), base = cv.getTextSize(s, cv.FONT_HERSHEY_SIMPLEX, scale, thick)
+    x, y = org
+    y0, y1 = max(y - h - 4, 0), min(y + base + 2, img.shape[0])
+    x1 = min(x + w + 4, img.shape[1])
+    if y1 > y0 and x1 > max(x - 4, 0):
+        band = img[y0:y1, max(x - 4, 0):x1]
+        band[:] = (band * 0.35).astype(img.dtype)
     cv.putText(img, s, org, cv.FONT_HERSHEY_SIMPLEX, scale, color, thick, cv.LINE_AA)

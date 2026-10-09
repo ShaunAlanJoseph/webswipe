@@ -40,5 +40,8 @@ class HandTracker:
         for lms, wl, hd in zip(r.hand_landmarks, r.hand_world_landmarks, r.handedness):
             px = np.array([[p.x * w, p.y * h] for p in lms])
             world = np.array([[p.x, p.y, p.z] for p in wl])
-            hands.append(Hand(px, world, hd[0].category_name, hd[0].score))
+            # the app mirrors the frame before tracking, and the Tasks API then reports the opposite hand
+            # (the user's right hand came back as "Left"); swap so "Right" is the user's right hand
+            side = {"Left": "Right", "Right": "Left"}.get(hd[0].category_name, hd[0].category_name)
+            hands.append(Hand(px, world, side, hd[0].score))
         return hands, ms

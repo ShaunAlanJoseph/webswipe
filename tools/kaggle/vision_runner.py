@@ -210,10 +210,22 @@ def main():
     def save():
         json.dump(res, open(f"{OUT}/vision_results.json", "w"), indent=1)
 
+    t_start = time.time()
+    # watchdog: a hung or crawling run must not drain the GPU quota (one ran ~5 h on Oct 9)
+    import threading
+    limit = CFG.get("max_hours", 2.0) * 3600 + 900
+
+    def kill():
+        res["killed"] = f"watchdog after {limit / 3600:.2f} h"
+        save()
+        print("WATCHDOG: time limit reached, exiting", flush=True)
+        os._exit(3)
+    threading.Timer(limit, kill).start()
     for fold in CFG["folds"]:
         train_own = [r for s in fold["train"] for r in sessions[s]]
-        test_sets = {f"own_{'+'.join(fold['test'])}": [r for s in fold["test"] for r in sessions[s]],
-                     "hagrid_val": hag_val}
+        test_sets = {"hagrid_val": hag_val}
+        if fold["test"]:
+            test_sets[f"own_{'+'.join(fold['test'])}"] = [r for s in fold["test"] for r in sessions[s]]
         for imgsz in CFG["imgsz"]:
             key = f"{fold['name']}/released/{imgsz}"
             res["runs"][key] = {"eval": evaluate(YOLO(base), test_sets, imgsz, BASE_MAP)}
@@ -221,6 +233,10 @@ def main():
             save()
             for mix in CFG["mixes"]:
                 key = f"{fold['name']}/{mix}/{imgsz}"
+                if (time.time() - t_start) / 3600 > CFG.get("max_hours", 2.0):
+                    res["runs"][key] = {"skipped": "max_hours reached"}
+                    print(key, "skipped: max_hours reached", flush=True)
+                    continue
                 # "own+hagrid" = all HaGRID images, "own+hagrid25" = 25% of them
                 frac = int(mix.split("hagrid")[1] or 100) / 100 if "hagrid" in mix else 0
                 train = train_own + hag_train[:int(len(hag_train) * frac)]
@@ -246,6 +262,7 @@ def main():
                 save()
     save()
     print("DONE", flush=True)
+    os._exit(0)  # do not wait for the watchdog timer thread
 
 
 if __name__ == "__main__":

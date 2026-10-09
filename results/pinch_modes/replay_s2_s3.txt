@@ -1,0 +1,20 @@
+#### s3 (model never saw it)
+contact                         pinch 96%  none 36%  
+rule (old)                      pinch 91%  none 30%  
+detector, 1 frame               pinch 85%  none 3%  
+detector, 2 of 3                pinch 78%  none 2%  
+contact+det start>=0.3 votes 1/3  pinch 96%  none 17%  
+contact+det start>=0.5 votes 1/3  pinch 96%  none 17%  
+contact+det start>=0.3 votes 2/3  pinch 95%  none 17%  
+contact+det start>=0.5 votes 2/3  pinch 95%  none 17%  
+#### s2 (model never saw it)
+contact                         pinch 94%  none 37%  
+rule (old)                      pinch 51%  none 0%  
+detector, 1 frame               pinch 48%  none 0%  
+detector, 2 of 3                pinch 37%  none 0%  
+contact+det start>=0.3 votes 1/3  pinch 89%  none 0%  
+contact+det start>=0.5 votes 1/3  pinch 89%  none 0%  
+contact+det start>=0.3 votes 2/3  pinch 88%  none 0%  
+contact+det start>=0.5 votes 2/3  pinch 88%  none 0%  
+
+[exited with code 0]

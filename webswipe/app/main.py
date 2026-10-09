@@ -12,7 +12,7 @@ from .controls import Candidates, OtherHandControl, SwipeSegmenter
 from .cvfpscalc import CvFpsCalc
 from .draw import draw_landmarks, draw_trace, text
 from .keyboard_ui import KeyboardOverlay
-from .pinch import OneEuro, PinchDetector, pinch_point
+from .pinch import ContactPinch, OneEuro, PinchDetector, pinch_point
 from .recorder import Recorder
 from .tap import EventLog, TapTyper
 from .tracking import HandTracker
@@ -38,6 +38,17 @@ def get_args():
     ap.add_argument("--width", type=int, default=640)
     ap.add_argument("--height", type=int, default=480)
     ap.add_argument("--hand", choices=["Right", "Left"], default="Right", help="dominant hand")
+    ap.add_argument("--pinch", choices=["contact", "contact+detector", "detector", "rule"], default="contact",
+                    help="contact = fixed thumb-touches-index rule on MediaPipe landmarks; detector = fine-tuned "
+                         "HaGRID YOLOv10n; contact+detector = both must agree; rule = old self-calibrating threshold")
+    ap.add_argument("--contact-on", type=float, default=0.2, help="contact: pinch below this tip gap / palm length")
+    ap.add_argument("--contact-off", type=float, default=0.3, help="contact: release above this")
+    ap.add_argument("--gesture-model", default="models/gesture_320.onnx")
+    ap.add_argument("--det-on", type=float, default=0.5, help="detector: pinch turns on at this score")
+    ap.add_argument("--det-off", type=float, default=0.3, help="detector: pinch turns off below this score")
+    ap.add_argument("--det-start", type=float, default=0.3,
+                    help="contact+detector: detector pinch score needed (with the tips touching) to start a pinch")
+    ap.add_argument("--det-votes", type=int, default=2, help="detector frames out of the last 3 needed to start")
     ap.add_argument("--headless", action="store_true")
     ap.add_argument("--max-frames", type=int, default=0)
     return ap.parse_args()
@@ -95,7 +106,19 @@ def main():
 
     tracker = HandTracker()
     ui = KeyboardOverlay(W, H)
-    pinch, other_pinch = PinchDetector(), PinchDetector()
+    if a.pinch == "rule":
+        pinch, other_pinch = PinchDetector(), PinchDetector()
+    else:
+        pinch, other_pinch = (ContactPinch(a.contact_on, a.contact_off), ContactPinch(a.contact_on, a.contact_off))
+    det = None
+    if "detector" in a.pinch:
+        from .gesture_det import GestureDetector, StateFilter, assign
+        det = GestureDetector(a.gesture_model)
+        dom_state = StateFilter("ok", a.det_on, a.det_off, a.det_votes)
+        other_state = StateFilter("ok", a.det_on, a.det_off, a.det_votes)
+        other_fist = StateFilter("fist", a.det_on, a.det_off, a.det_votes)
+    print(f"pinch: {a.pinch}" + (f" ({a.gesture_model})" if det else ""))
+    fist_since, det_label = None, ""
     smooth = OneEuro()
     fps = CvFpsCalc(buffer_len=10)
     other = "Left" if a.hand == "Right" else "Right"
@@ -135,12 +158,30 @@ def main():
             rec.frame(t_ms, hands)
 
         dom = pick(hands, a.hand)
+        oh = pick(hands, other)
         on, ratio = False, None
+        if det is not None:
+            dets = det(frame)
+            dom_sc = assign(dets, [dom])[0] if dom is not None else None
+            oh_sc = assign(dets, [oh])[0] if oh is not None else None
+            det_label = " ".join(f"{k}:{v:.2f}" for k, v in (dom_sc or {}).items() if v >= 0.25)
         if dom is not None:
-            on, ratio = pinch.update(dom.px)
+            touch, ratio = pinch.update(dom.px)
+            if a.pinch == "detector":
+                on, _ = dom_state.update(dom_sc)
+            elif a.pinch == "contact+detector":
+                # fingertips must touch, and the detector must see a pinch to start one (it keeps going while
+                # the tips stay together, so a blurred mid-swipe frame cannot cut a word)
+                voted = dom_state.started(dom_sc, a.det_start)
+                on = touch and (dom_state.on or voted)
+                dom_state.on = on
+            else:
+                on = touch
             cur = smooth(pinch_point(dom.px), t_ms / 1000)
         else:
             pinch.reset_state(); smooth.reset()
+            if det is not None:
+                dom_state.reset_state()
 
         event, keep = seg.update(dom is not None, on, t_ms)
         if event == "start":
@@ -172,9 +213,25 @@ def main():
                 rec.cancel()
 
         # non-dominant hand: short pinch = next candidate (type) / skip word (record); hold = delete last word
-        oh = pick(hands, other)
-        o_on = other_pinch.update(oh.px)[0] if oh is not None else False
+        if det is not None:
+            o_touch = other_pinch.update(oh.px)[0] if oh is not None else False
+            if a.pinch == "detector":
+                o_on = other_state.update(oh_sc)[0] if oh is not None else False
+            else:
+                o_voted = other_state.started(oh_sc, a.det_start) if oh is not None else False
+                o_on = o_touch and (other_state.on or o_voted)
+                other_state.on = o_on
+            # detector only: a fist held 400 ms on the other hand deletes the last word (fires once per fist)
+            fisted = other_fist.update(oh_sc)[0] if oh is not None else False
+            if fisted and fist_since is None:
+                fist_since = t_ms
+            elif not fisted:
+                fist_since = None
+        else:
+            o_on = other_pinch.update(oh.px)[0] if oh is not None else False
         action = other_ctl.update(o_on, t_ms)
+        if det is not None and fist_since is not None and t_ms - fist_since >= 400 and not action:
+            action, fist_since = "delete", float("inf")
         if action and rec:
             sess.next()
         elif action and tapper:
@@ -202,8 +259,9 @@ def main():
         draw_trace(img, trace_img if seg.active else [])
         if dom is not None:
             cv.circle(img, tuple(int(v) for v in cur), 10, (0, 255, 0) if on else (0, 0, 255), -1)
-        text(img, f"FPS {fps.get():.0f}  pinch {'ON' if on else 'off'}"
-                  + (f"  r={ratio:.2f} thr={pinch.thr:.2f}" if ratio is not None else ""), (10, 25))
+        text(img, f"FPS {fps.get():.0f}  pinch {'ON' if on else 'off'} [{a.pinch}]"
+                  + (f"  r={ratio:.2f} thr={pinch.thr:.2f}" if ratio is not None else "")
+                  + (f"  {det_label}" if det is not None else ""), (10, 25))
         if rec:
             text(img, f"[{a.participant}] saved {rec.count}", (10, 55))
             text(img, " ".join(sess.phrase), (10, 90), 0.7)
