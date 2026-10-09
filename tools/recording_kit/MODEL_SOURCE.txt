@@ -1,0 +1,10 @@
+Bundled model: models/hand_landmarker.task
+Google MediaPipe Hand Landmarker model bundle, copied from the working project.
+Official model documentation:
+https://developers.google.com/edge/mediapipe/solutions/vision/hand_landmarker
+Download source:
+https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/latest/hand_landmarker.task
+MediaPipe project and license:
+https://github.com/google-ai-edge/mediapipe
+https://github.com/google-ai-edge/mediapipe/blob/master/LICENSE
+Installed dependencies retain their upstream licenses in the environment.

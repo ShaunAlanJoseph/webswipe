@@ -1,0 +1,89 @@
+Before sharing this kit, copy models/hand_landmarker.task from the WebSwipe repository into a models/ folder here.
+
+WEBSWIPE TEAM RECORDING - POSES + WORDS (ABOUT 10 MINUTES)
+Please send your ZIP to Shaun by Saturday evening, 10 October.
+Allow extra time for first-time installation and reading these instructions.
+
+1. SET UP AND LAUNCH
+Extract this entire ZIP into a NEW folder. Do not run inside a ZIP preview.
+You need a webcam, Python, and internet for dependency installation. Python 3.11
+or 3.12 is a suitable choice; use python.org if you need to install it. On Windows,
+enable "Add Python to PATH". The hand-tracking model is included; no GPU needed.
+Windows: double-click record_windows.bat.
+Mac/Linux: open Terminal in the extracted folder and run:
+  bash record_mac_linux.sh
+Enter your name/nickname, setting (e.g. roomday), camera number (usually 0), and
+brief setup description. Use the same name if you record again.
+Close other camera apps and allow camera access. These recordings include your
+face/background; choose a setting you are comfortable sharing with the team.
+Use normal typing distance and usable lighting. Keep your whole hand visible.
+One setup is enough: do not spend your ten minutes changing cameras or rooms.
+
+2. HAND POSES - 3 MINUTES 20 SECONDS
+Four poses repeated twice. Each has 5 seconds GET READY, then 20 seconds REC.
+Adopt the requested pose during GET READY and keep it throughout REC:
+- RIGHT PINCH: thumb/index fingertips TOUCHING. Move across the keyboard as
+  though swiping words. Other fingers can relax.
+- RIGHT NEAR: thumb/index close but visibly NOT TOUCHING. Make similar movements.
+- LEFT PINCH: thumb/index fingertips TOUCHING. Gently vary position and angle.
+- LEFT NEAR: thumb/index close but visibly NOT TOUCHING. Gently vary position/angle.
+Keep the other hand down. RIGHT/LEFT means your physical hand. Your left hand
+can remain comfortably on the left; it need not reach the displayed keyboard.
+Do not switch between touching and separated during one segment. NEAR does
+not mean fully spread fingers or a fist. Gently vary angle without changing pose.
+Click the camera window first. R = redo CURRENT segment; Q = stop; N = skip.
+Q/N may leave poses incomplete. If a mistake advances before you press R, tell
+Shaun which pose/round was affected when sending the ZIP.
+
+3. WORD SWIPES - UP TO 6 MINUTES 40 SECONDS
+When the pose window closes, return to the terminal and press Enter for words.
+There are TWO practice words, then up to 30 word prompts. Practice and retries
+count toward the timer. It starts when you press S on the first practice word.
+Finish the list or let the timer stop it; fewer good words are better than rushing.
+
+For EACH word:
+  a. Use your RIGHT hand. Pinch thumb and index together and move the orange
+     cursor to the FIRST letter. Press S to arm the recording.
+  b. Hold the physical SPACE key with your LEFT hand. While holding it, move
+     the pinched right hand through the word's letters in order. Do not tap
+     each letter or release between letters. For repeated letters (hello),
+     pause briefly on that letter without opening your pinch.
+  c. At the LAST letter, RELEASE SPACE immediately while staying over the key.
+     Then open your fingers. The recorder saves a short release-video tail.
+  d. Inspect the drawn path: A = accept; R = retry your mistake; F = retry a
+     tracking failure; N = skip a difficult word. Then press S for the next word.
+The right-hand cursor must be visible before you begin. Keep your left hand
+near the physical keyboard and out of the camera view while holding Space.
+The displayed keyboard matches the app layout. Keep fingers pinched throughout
+one word. SPACE controls recording boundaries even if pinch detection would fail.
+No predicted word is shown: accept based on whether you followed the target and
+whether the path tracked your movement. If you fumble Space, use R to retry.
+If the window loses focus, that attempt is saved as interrupted; press S to retry.
+Q = save and exit early. Retried/skipped attempts remain available for analysis.
+Stop when the recorder finishes; no extra spelling or second pose session needed.
+
+4. SEND ONE FILE
+Return to the terminal and WAIT for "SEND THIS ONE FILE TO SHAUN".
+The combined ZIP is in SEND_THESE_FILES/. It contains BOTH pose images and word
+videos/paths. Upload that ZIP to your usual shared Drive/cloud folder and send
+Shaun a link he can open. Do not send the kit, .venv, or screenshots instead.
+A ZIP marked PARTIAL is still useful: send it and mention missing work/errors.
+Mention recording mistakes. Nothing uploads automatically. Keep originals until
+Shaun confirms receipt. Video may make the returned ZIP several hundred MB.
+
+TROUBLESHOOTING
+Wrong/black camera: close other camera apps, allow camera access, try camera 1.
+Mac: allow camera access for Terminal/Python. Linux: use a desktop session, not WSL
+or a headless server; install python3-venv or libGL if an error names either.
+Installation failed: check internet and rerun the launcher. If there is no package
+for your Python version, use Python 3.11/3.12 in a newly extracted kit folder.
+Keys not working: click the recorder window, then use the displayed keys.
+RIGHT hand not detected: bring it fully into view and rotate slightly so fingertips
+are visible. If it never works, send Shaun the error/details; don't spend hours.
+If the word tool fails, the wrapper still packages any saved poses and words.
+
+WHAT IS SAVED
+Poses: original camera images and pose labels implied by the recording segments.
+Words: raw mirrored video, finger landmarks, timestamps, swipe paths, intended
+words, and accepted/retry/skipped status. Practice/retry traces are not exported
+as accepted training examples. Full code, model, and setup launchers are included.
