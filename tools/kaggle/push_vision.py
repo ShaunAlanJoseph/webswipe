@@ -33,6 +33,8 @@ def frames(sessions):
                 z.write(src / r["file"], f"{s}/{r['file']}")
         print(f"{s}: {len(recs)} frames, {(d / f'frames_{s}.zip').stat().st_size / 1e6:.0f} MB")
     shutil.copy(BASE, d / BASE.name)
+    if (ROOT / "data/hagrid_subset.zip").exists():  # from prep_hagrid.py; lets runs skip the public dataset
+        shutil.copy(ROOT / "data/hagrid_subset.zip", d / "hagrid_subset.zip")
     (d / "dataset-metadata.json").write_text(json.dumps(
         {"title": "webswipe-frames", "id": DATASET, "licenses": [{"name": "other"}]}, indent=1))
     exists = subprocess.run([KAGGLE, "datasets", "status", DATASET], capture_output=True, text=True)
@@ -57,7 +59,7 @@ def run(a):
     (d / "kernel-metadata.json").write_text(json.dumps({
         "id": f"{USER}/{slug}", "title": slug, "code_file": "vision_runner.py", "language": "python",
         "kernel_type": "script", "is_private": True, "enable_gpu": not a.cpu, "enable_internet": True,
-        "dataset_sources": [DATASET, HAGRID], "kernel_sources": [], "competition_sources": []}, indent=1))
+        "dataset_sources": [DATASET] + ([] if a.no_hagrid_mount else [HAGRID]), "kernel_sources": [], "competition_sources": []}, indent=1))
     cmd = [KAGGLE, "kernels", "push", "-p", str(d)]
     if not a.cpu:
         cmd += ["--accelerator", "NvidiaTeslaT4"]
@@ -79,5 +81,6 @@ if __name__ == "__main__":
     r.add_argument("--seed", type=int, default=0)
     r.add_argument("--cpu", action="store_true")
     r.add_argument("--smoke", action="store_true")
+    r.add_argument("--no-hagrid-mount", action="store_true", help="use hagrid_subset.zip from our dataset instead")
     a = ap.parse_args()
     frames(a.sessions) if a.cmd == "frames" else run(a)

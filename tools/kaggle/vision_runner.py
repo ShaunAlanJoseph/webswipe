@@ -35,7 +35,7 @@ def sh(cmd):
 
 
 def find(pattern):
-    return sorted(glob.glob(f"{INPUT}/**/{pattern}", recursive=True))
+    return sorted(glob.glob(f"{INPUT}/**/{pattern}", recursive=True) + glob.glob(f"{WS}/hagrid/**/{pattern}", recursive=True))
 
 
 # ---------------------------------------------------------------- data
@@ -56,6 +56,8 @@ def load_sessions():
 
 def load_hagrid(rng):
     """(train, val) records from the HaGRID 30k sample, mapped to our four classes."""
+    for z in find("hagrid_subset.zip"):  # our re-upload of the subset (the public dataset fails to mount on GPU)
+        zipfile.ZipFile(z).extractall(f"{WS}/hagrid")
     ann = {os.path.basename(a)[:-5]: a for a in find("ann_train_val/*.json")}
     train, val = [], []
     for cls, ours in HAGRID_MAP.items():
@@ -63,7 +65,7 @@ def load_hagrid(rng):
         n_tr, n_va = (400, 100) if key else (100, 30)
         if SMOKE:
             n_tr, n_va = 12, 6
-        files = sorted(glob.glob(f"{INPUT}/**/train_val_{cls}/*.jpg", recursive=True))
+        files = find(f"train_val_{cls}/*.jpg")
         rng.shuffle(files)
         recs_ann = json.load(open(ann[cls]))
         for i, f in enumerate(files[:n_tr + n_va]):
@@ -196,6 +198,7 @@ def main():
            "YOLOv10n_gestures.pt")
     sessions = load_sessions()
     hag_train, hag_val = load_hagrid(rng)
+    rng.shuffle(hag_train)  # load_hagrid returns class by class; a fraction must sample every class
     if SMOKE:
         sessions = {k: v[::40] for k, v in sessions.items()}
     res = {"cfg": CFG, "device": str(device), "gpu": torch.cuda.get_device_name(0) if device == 0 else None,
@@ -218,7 +221,9 @@ def main():
             save()
             for mix in CFG["mixes"]:
                 key = f"{fold['name']}/{mix}/{imgsz}"
-                train = train_own + (hag_train if "hagrid" in mix else [])
+                # "own+hagrid" = all HaGRID images, "own+hagrid25" = 25% of them
+                frac = int(mix.split("hagrid")[1] or 100) / 100 if "hagrid" in mix else 0
+                train = train_own + hag_train[:int(len(hag_train) * frac)]
                 rng.shuffle(train)
                 # validation during training uses HaGRID only, so the test session never guides model choice
                 data = make_dataset(key.replace("/", "_").replace("+", "_"), train, hag_val)
