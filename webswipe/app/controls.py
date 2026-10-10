@@ -45,16 +45,20 @@ class SwipeSegmenter:
 
 
 class ReleaseDelay:
-    """Bridge brief false readings; sustained release turns off after delay_ms."""
+    """Confirm consecutive observations before onset; bridge brief false readings."""
 
-    def __init__(self, delay_ms=120):
+    def __init__(self, delay_ms=120, start_votes=1):
         self.delay_ms = delay_ms
+        self.start_votes = max(1, start_votes)
+        self.observed = 0
         self.on = False
         self.off_since = None
 
     def update(self, detected, t_ms):
+        self.observed = self.observed + 1 if detected else 0
         if detected:
-            self.on, self.off_since = True, None
+            if self.on or self.observed >= self.start_votes:
+                self.on, self.off_since = True, None
         elif self.on:
             if self.off_since is None:
                 self.off_since = t_ms

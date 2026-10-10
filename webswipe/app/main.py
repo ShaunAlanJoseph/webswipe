@@ -39,6 +39,7 @@ def get_args():
     ap.add_argument("--endpoint-weight", type=float, default=0.0,
                     help="neural decoder: optional soft start/end key penalty (default off)")
     ap.add_argument("--camera", type=int, default=0)
+    ap.add_argument("--fresh-camera", action="store_true", help="keep only the newest camera frame during inference")
     ap.add_argument("--width", type=int, default=640)
     ap.add_argument("--height", type=int, default=480)
     ap.add_argument("--hand", choices=["Right", "Left"], default="Right", help="dominant hand")
@@ -48,6 +49,8 @@ def get_args():
     ap.add_argument("--contact-on", type=float, default=0.2, help="contact: pinch below this tip gap / palm length")
     ap.add_argument("--contact-off", type=float, default=0.27, help="contact: release above this")
     ap.add_argument("--gesture-model", default="models/gesture_320.onnx")
+    ap.add_argument("--gesture-input", choices=["full", "hand"], default="full",
+                    help="hand uses landmark crops; requires a checkpoint trained on those crops")
     ap.add_argument("--det-on", type=float, default=0.5, help="detector: pinch turns on at this score")
     ap.add_argument("--det-off", type=float, default=0.3, help="detector: pinch turns off below this score")
     ap.add_argument("--det-start", type=float, default=0.3,
@@ -60,8 +63,13 @@ def get_args():
     ap.add_argument("--decoder-threads", type=int, default=2, help="CPU threads for neural word decoding")
     ap.add_argument("--release-ms", type=float, default=80,
                     help="sustained release needed to finish a swipe (milliseconds)")
+    ap.add_argument("--fist-delete", action="store_true",
+                    help="enable the legacy extra fist-to-delete shortcut (off by default)")
     ap.add_argument("--other-pinch", choices=["contact", "same"], default="contact",
                     help="other-hand controls: contact rule, or same detector mode as typing hand")
+    ap.add_argument("--hide-cursor", action="store_true", help="hide cursor and moving key highlight; C toggles live")
+    ap.add_argument("--hide-trail", action="store_true", help="hide live swipe trail; T toggles live")
+    ap.add_argument("--hide-skeleton", action="store_true", help="hide hand skeleton; H toggles live")
     ap.add_argument("--headless", action="store_true")
     ap.add_argument("--max-frames", type=int, default=0)
     return ap.parse_args()
@@ -123,6 +131,9 @@ def main():
     if not ok:
         raise SystemExit("cannot read from camera")
     H, W = frame.shape[:2]
+    if a.fresh_camera:
+        from .camera import LatestFrameCamera
+        cap = LatestFrameCamera(cap)
 
     if not a.headless:
         cv.namedWindow("WebSwipe", cv.WINDOW_NORMAL)
@@ -182,11 +193,12 @@ def main():
 
     words, last_ms = Candidates(), 0.0
     seg, other_ctl = SwipeSegmenter(release_ms=a.release_ms), OtherHandControl()
-    other_release = ReleaseDelay(a.release_ms)
+    other_release = ReleaseDelay(a.release_ms, start_votes=2)
     trace_img, trace_kb = [], []
     start_buffer = (GuardedStartBuffer(a.start_lookback_ms) if a.guarded_start
                     else SwipeStartBuffer(a.start_lookback_ms))
     recovered_start_ms = 0
+    show_cursor, show_trail, show_skeleton = not a.hide_cursor, not a.hide_trail, not a.hide_skeleton
     n = 0
     try:
         while True:
@@ -203,7 +215,11 @@ def main():
             on, ratio, touch, cur = False, None, False, None
             dom_sc, oh_sc = None, None
             if det is not None:
-                dets = det(frame)
+                if a.gesture_input == "hand":
+                    from .hand_crop import detect_hands
+                    dets = detect_hands(det, frame, hands)
+                else:
+                    dets = det(frame)
                 dom_sc = assign(dets, [dom])[0] if dom is not None else None
                 oh_sc = assign(dets, [oh])[0] if oh is not None else None
                 det_label = " ".join(f"{k}:{v:.2f}" for k, v in (dom_sc or {}).items() if v >= 0.25)
@@ -282,8 +298,8 @@ def main():
                     o_voted = other_state.started(oh_sc, a.det_start) if oh is not None else False
                     o_on = o_touch and (other_state.on or o_voted)
                     other_state.on = o_on
-                # detector only: a fist held 400 ms on the other hand deletes the last word (fires once per fist)
-                fisted = other_fist.update(oh_sc)[0] if oh is not None else False
+                # Optional legacy shortcut; disabled normally because a pinching hand can be classified as a fist.
+                fisted = other_fist.update(oh_sc)[0] if a.fist_delete and oh is not None else False
                 if fisted and fist_since is None:
                     fist_since = t_ms
                 elif not fisted:
@@ -297,7 +313,7 @@ def main():
                     other_fist.reset_state()
             o_on = other_release.update(o_on, t_ms)
             action = other_ctl.update(o_on, t_ms)
-            if det is not None and fist_since is not None and t_ms - fist_since >= 400 and not action:
+            if a.fist_delete and det is not None and fist_since is not None and t_ms - fist_since >= 400 and not action:
                 action, fist_since = "delete", float("inf")
             if guided is not None:
                 action = None
@@ -337,15 +353,16 @@ def main():
                     release_since_ms=seg.release_since, lost_since_ms=seg.lost_since))
 
             # draw
-            img = ui.draw(frame, highlight=ui.key_at(cur) if dom is not None else None)
-            for h in hands:
-                draw_landmarks(img, h.px)
+            img = ui.draw(frame, highlight=ui.key_at(cur) if show_cursor and dom is not None else None)
+            if show_skeleton:
+                for h in hands:
+                    draw_landmarks(img, h.px)
             if guided is not None and guided.state == "review":
                 for recorded in guided.attempt.data['segments']:
                     draw_trace(img, [ui.to_img(p[:2]) for p in recorded['trace_kb']])
-            else:
+            elif show_trail:
                 draw_trace(img, trace_img if seg.active else [])
-            if dom is not None:
+            if show_cursor and dom is not None:
                 cv.circle(img, tuple(int(v) for v in cur), 10, (0, 255, 0) if on else (0, 0, 255), -1)
             text(img, f"FPS {fps.get():.0f}  pinch {'ON' if on else 'off'} [{a.pinch}]"
                       + (f"  r={ratio:.2f} thr={pinch.thr:.2f}" if ratio is not None else "")
@@ -375,6 +392,7 @@ def main():
                 color = (50, 220, 50) if on else (0, 210, 255)
                 cv.rectangle(img, (0, 227), (W, 255), (20, 20, 20), -1)
                 text(img, cue, (10, 247), 0.55, color)
+            text(img, f"C cursor {'on' if show_cursor else 'off'} | T trail {'on' if show_trail else 'off'} | H skeleton {'on' if show_skeleton else 'off'}", (10, H - 38), 0.45)
             if not a.headless:
                 cv.imshow("WebSwipe", img)
                 key = cv.waitKey(1) & 0xFF
@@ -383,6 +401,12 @@ def main():
                     guided.pending = None
                 if key in (27, ord("q")) or cv.getWindowProperty("WebSwipe", cv.WND_PROP_VISIBLE) < 1:
                     break
+                if key == ord("c"):
+                    show_cursor = not show_cursor
+                elif key == ord("t"):
+                    show_trail = not show_trail
+                elif key == ord("h"):
+                    show_skeleton = not show_skeleton
                 if guided is not None:
                     if key == 32 and guided.state == "ready":
                         guided.start()
