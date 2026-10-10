@@ -19,6 +19,7 @@ INPUT, OUT, WS = "/kaggle/input", "/kaggle/working/out", "/tmp/ws"
 CLASSES = ["ok", "palm", "fist", "no_gesture"]
 STATES = ["ok", "palm", "fist"]                      # what the keyboard reacts to; anything else is "none"
 SEG_STATE = {"pinch": "ok", "open": "palm", "palm": "palm", "fist": "fist", "none": "none"}
+SEG_STATE.update({"right_near": "none", "left_near": "none", "left_pinch": "ok"})
 # released 34-class model -> our states (generous: every pinch-like / open-hand class counts)
 BASE_MAP = {"ok": "ok", "grip": "ok", "palm": "palm", "stop": "palm", "four": "palm", "fist": "fist"}
 # HaGRID sample images used for mixing: gesture class -> our class; classes not listed are left out

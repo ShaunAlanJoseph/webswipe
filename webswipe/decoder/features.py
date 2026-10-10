@@ -110,3 +110,18 @@ def featurize(coords, kb, n=N_POINTS):
 def encode_word(word, max_letters=12):
     # 1..26 = letters, 27 = word boundary, 28 = CTC blank
     return [BOUNDARY] + [LETTERS.index(ch) + 1 for ch in word[:max_letters]] + [BOUNDARY]
+
+
+def endpoint_cost(trace_kb, kb, words):
+    """Soft start/end mismatch in key pitches; independent of the intended word.
+
+    Cap severe mismatches so missing/incorrect boundaries cannot dominate all
+    sequence evidence. Use the raw recorded endpoints before feature smoothing.
+    """
+    trace = np.asarray(trace_kb, float)
+    first = np.array([LETTERS.index(w[0]) for w in words])
+    last = np.array([LETTERS.index(w[-1]) for w in words])
+    pitch = kb.width / (620 / 60)
+    cost = (np.square(kb.centers[first] - trace[0, :2]).sum(1)
+            + np.square(kb.centers[last] - trace[-1, :2]).sum(1)) / (2 * pitch ** 2)
+    return np.minimum(cost, 12)

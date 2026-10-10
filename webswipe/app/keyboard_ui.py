@@ -6,9 +6,9 @@ from webswipe.decoder.features import LETTERS, Keyboard
 
 
 class KeyboardOverlay:
-    def __init__(self, frame_w, frame_h, width_frac=0.8, top_frac=0.55):
+    def __init__(self, frame_w, frame_h, width_frac=0.45, top_frac=0.60):
         self.pitch = frame_w * width_frac / 10.33   # keyboard is ~10.33 key pitches wide
-        self.x0 = frame_w * (1 - width_frac) / 2 + self.pitch / 2
+        self.x0 = frame_w * (1 - width_frac - 0.04) + self.pitch / 2
         self.y0 = frame_h * top_frac
         # decoder keyboard: same geometry, y up, origin at the 'q' key centre
         self.kb = Keyboard.from_pitch(self.pitch, self.pitch)

@@ -5,14 +5,17 @@ import numpy as np
 import torch
 
 from .decode import Lexicon
-from .features import featurize, resample_time
+from .features import endpoint_cost, featurize, resample_time
 from .model import ShenDecoder
 
 
 class LiveDecoder:
-    def __init__(self, ckpt, lexicon_words, prior_weight=0.0, resample_hz=0.0):
+    def __init__(self, ckpt, lexicon_words, prior_weight=0.0, resample_hz=0.0, endpoint_weight=0.0):
         """prior_weight > 0 adds a wordfreq unigram prior; resample_hz > 0 puts the trace on a uniform
         clock before featurising (the decoder's smoothing window is in frames, tuned for ~50 Hz)."""
+        if not np.isfinite(endpoint_weight) or endpoint_weight < 0:
+            raise ValueError("endpoint_weight must be finite and nonnegative")
+        self.endpoint_weight = endpoint_weight
         self.model = ShenDecoder()
         self.model.load_state_dict(torch.load(ckpt, map_location="cpu")["model"])
         self.model.eval()
@@ -33,7 +36,14 @@ class LiveDecoder:
         if f is None:
             return [], 0.0
         logits = self.model(torch.from_numpy(f)[None])[0]
-        return self.lex.topk(logits, k, self.prior_weight), (time.perf_counter() - t0) * 1000
+        if self.endpoint_weight:
+            scores = self.lex.scores(logits, self.prior_weight)
+            penalty = torch.as_tensor(endpoint_cost(tr, kb, self.lex.words), dtype=scores.dtype, device=scores.device)
+            indices = torch.topk(scores - self.endpoint_weight * penalty, min(k, len(self.lex.words))).indices.tolist()
+            candidates = [self.lex.words[i] for i in indices]
+        else:
+            candidates = self.lex.topk(logits, k, self.prior_weight)
+        return candidates, (time.perf_counter() - t0) * 1000
 
 
 class LiveShark2:

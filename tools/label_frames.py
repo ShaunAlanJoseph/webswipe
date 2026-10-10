@@ -18,8 +18,10 @@ from mediapipe.tasks.python import BaseOptions, vision
 CLASSES = ["ok", "palm", "fist", "no_gesture"]
 SEG_CLASS = {"pinch": "ok", "open": "palm", "palm": "palm", "fist": "fist", "none": "no_gesture"}
 # in the mirrored frame the user's right hand is on the right; open/pinch use it, fist/palm use the left
+SEG_CLASS.update({"right_near": "no_gesture", "left_near": "no_gesture", "left_pinch": "ok"})
 SEG_SIDE = {"pinch": "right", "open": "right", "palm": "left", "fist": "left"}
 
+SEG_SIDE.update({"right_near": "right", "left_near": "left", "left_pinch": "left"})
 
 def box(lm, margin=0.12):
     xy = np.array([[p.x, p.y] for p in lm])

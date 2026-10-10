@@ -18,6 +18,7 @@ NAMES = ["grabbing", "grip", "holy", "point", "call", "three3", "timeout", "xsig
 ACCEPT = {"pinch": {"ok", "grip"}, "fist": {"fist"}, "palm": {"palm", "stop", "four"},
           "open": {"no_gesture", "palm", "stop", "four"}}
 
+ACCEPT["left_pinch"] = ACCEPT["pinch"]
 
 def infer(sess, frame, size):
     h, w = frame.shape[:2]
@@ -68,7 +69,7 @@ def main():
                 st["n"] += 1
                 st["called"][top] += 1
                 st["any_gesture"] += bool(gest)
-                if lab == "none":
+                if lab in {"none", "right_near", "left_near"}:
                     st["correct"] += not gest
                 elif lab == "open":
                     st["correct"] += top in ACCEPT["open"] or top == "nothing"

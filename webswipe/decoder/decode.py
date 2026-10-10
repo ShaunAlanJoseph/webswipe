@@ -35,7 +35,7 @@ class Lexicon:
         V, T = len(self.words), logits.shape[0]
         logp = logits.log_softmax(-1)[:, None].expand(T, V, -1)
         nll = F.ctc_loss(logp, self.targets, torch.full((V,), T, dtype=torch.long), self.lens,
-                         blank=BLANK, reduction="none", zero_infinity=True)
+                         blank=BLANK, reduction="none", zero_infinity=False)
         return -nll + prior_weight * self.logprior
 
     def topk(self, logits, k=4, prior_weight=0.0):

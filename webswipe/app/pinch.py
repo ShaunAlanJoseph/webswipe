@@ -99,7 +99,7 @@ class ContactPinch:
     cannot drift. Thresholds from the recordings (s1-s3): pinch median r 0.13-0.16, open hand 0.8-1.0.
     """
 
-    def __init__(self, on=0.2, off=0.3, scale_alpha=0.05):
+    def __init__(self, on=0.2, off=0.27, scale_alpha=0.05):
         self.thr, self.off_thr = on, off
         self.scale_alpha = scale_alpha
         self.scale = None
@@ -117,6 +117,54 @@ class ContactPinch:
     def reset_state(self):
         self.on = False
         self.med.clear()
+
+
+class DetectorRelease:
+    """End a latched contact pinch when sustained non-pinch evidence agrees with a widening gap.
+
+    This only acts on active pinches. A confident pinch or a tight gap cancels the
+    timer; a one-frame vision error cannot release the gesture. After forcing an
+    off state, wait for separation or a fresh, tight detector-approved pinch.
+    """
+
+    def __init__(self, gap=0.25, nonpinch_score=0.6, pinch_score=0.3, duration_ms=120,
+                 restart_gap=0.18, restart_score=0.5):
+        self.gap = gap
+        self.nonpinch_score = nonpinch_score
+        self.pinch_score = pinch_score
+        self.duration_ms = duration_ms
+        self.restart_gap = restart_gap
+        self.restart_score = restart_score
+        self.since = None
+        self.blocked = False
+
+    def update(self, contact, ratio, scores, t_ms):
+        scores = scores or {}
+        ok = scores.get('ok', 0.0)
+        other = max(scores.get('palm', 0.0), scores.get('fist', 0.0),
+                    scores.get('no_gesture', 0.0))
+        if not contact or ratio is None:
+            self.reset()
+            return False
+        if self.blocked:
+            if ratio < self.restart_gap and ok >= self.restart_score:
+                self.blocked = False
+            else:
+                return False
+        if ratio >= self.gap and other >= self.nonpinch_score and ok < self.pinch_score:
+            if self.since is None:
+                self.since = t_ms
+            elif t_ms - self.since >= self.duration_ms:
+                self.blocked = True
+                self.since = None
+                return False
+        else:
+            self.since = None
+        return True
+
+    def reset(self):
+        self.since = None
+        self.blocked = False
 
 
 def pinch_point(px):
