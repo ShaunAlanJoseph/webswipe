@@ -49,6 +49,7 @@ def get_args():
     ap.add_argument("--contact-on", type=float, default=0.2, help="contact: pinch below this tip gap / palm length")
     ap.add_argument("--contact-off", type=float, default=0.27, help="contact: release above this")
     ap.add_argument("--gesture-model", default="models/gesture_320.onnx")
+    ap.add_argument("--gesture-reference-model", help="optional hand-crop reference: veto open-hand pinch detections and keep its other-hand controls")
     ap.add_argument("--gesture-input", choices=["full", "hand"], default="full",
                     help="hand uses landmark crops; requires a checkpoint trained on those crops")
     ap.add_argument("--det-on", type=float, default=0.5, help="detector: pinch turns on at this score")
@@ -75,6 +76,8 @@ def get_args():
     args = ap.parse_args()
     if args.other_pinch == "confirmed-contact" and "detector" not in args.pinch:
         ap.error("--other-pinch confirmed-contact requires a detector pinch mode")
+    if args.gesture_reference_model and (args.pinch != "detector" or args.gesture_input != "hand"):
+        ap.error("--gesture-reference-model requires --pinch detector --gesture-input hand")
     return args
 
 
@@ -148,10 +151,12 @@ def main():
         pinch, other_pinch = PinchDetector(), PinchDetector()
     else:
         pinch, other_pinch = (ContactPinch(a.contact_on, a.contact_off), ContactPinch(a.contact_on, a.contact_off))
-    det = None
+    det = reference_det = None
     if "detector" in a.pinch:
         from .gesture_det import GestureDetector, StateFilter, assign
         det = GestureDetector(a.gesture_model)
+        if a.gesture_reference_model:
+            reference_det = GestureDetector(a.gesture_reference_model)
         dom_state = StateFilter("ok", a.det_on, a.det_off, a.det_votes)
         other_state = StateFilter("ok", a.det_on, a.det_off, a.det_votes)
         other_fist = StateFilter("fist", a.det_on, a.det_off, a.det_votes)
@@ -226,6 +231,12 @@ def main():
                     dets = det(frame)
                 dom_sc = assign(dets, [dom])[0] if dom is not None else None
                 oh_sc = assign(dets, [oh])[0] if oh is not None else None
+                if reference_det is not None:
+                    from .gesture_reference import checked_scores
+                    reference_dets = detect_hands(reference_det, frame, hands)
+                    if dom is not None:
+                        dom_sc = checked_scores(dom_sc, assign(reference_dets, [dom])[0])
+                    oh_sc = assign(reference_dets, [oh])[0] if oh is not None else None
                 det_label = " ".join(f"{k}:{v:.2f}" for k, v in (dom_sc or {}).items() if v >= 0.25)
             if dom is not None:
                 touch, ratio = pinch.update(dom.px)
