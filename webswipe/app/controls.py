@@ -193,3 +193,24 @@ class GuardedStartBuffer:
         self.points.clear()
         self.ready = False
         self.expired = False
+
+
+class ContactAppearanceGate:
+    """Require appearance confirmation once per contact episode, then follow contact.
+
+    ReleaseDelay separately confirms two observed frames and bridges brief loss.
+    An already active episode can recover during that bridge without approval
+    from a second model frame. Missing contact clears the stored approval.
+    """
+
+    def __init__(self, score=0.3):
+        self.score = score
+        self.approved = False
+
+    def update(self, contact, scores, active=False):
+        if not contact:
+            self.approved = False
+            return False
+        if (scores or {}).get("ok", 0.0) >= self.score:
+            self.approved = True
+        return bool(self.approved or active)

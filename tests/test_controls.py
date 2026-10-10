@@ -124,3 +124,112 @@ def test_recording_checker_and_resume(tmp_path):
     assert abs(out["p1"]["median_fps"] - 12) < 1
     assert resume_phrase("p1", out_dir=tmp_path) == 5
     assert resume_phrase("nobody", out_dir=tmp_path) == 0
+
+
+def test_brief_pinch_loss_does_not_finish_word():
+    seg = SwipeSegmenter(release_ms=120)
+    assert seg.update(True, True, 0) == ("start", True)
+    assert seg.update(True, False, 50) == (None, False)
+    assert seg.update(True, False, 100) == (None, False)
+    assert seg.update(True, True, 150) == (None, True)
+    assert seg.update(True, False, 200) == (None, False)
+    assert seg.update(True, False, 320) == ("end", False)
+    assert seg.update(True, False, 400) == (None, False)
+
+
+def test_tracking_loss_still_ends_delayed_release():
+    seg = SwipeSegmenter(max_gap_ms=200, release_ms=120)
+    seg.update(True, True, 0)
+    seg.update(True, False, 50)
+    assert seg.update(False, False, 100) == (None, False)
+    assert seg.update(False, False, 301) == ("end", False)
+    assert seg.update(True, True, 350) == ("start", True)
+
+
+def test_other_hand_hold_survives_short_false_reading():
+    from webswipe.app.controls import ReleaseDelay
+    delay, ctl = ReleaseDelay(120), OtherHandControl(600)
+    actions = []
+    for t in range(0, 1001, 50):
+        detected = t < 750 and t != 300
+        action = ctl.update(delay.update(detected, t), t)
+        if action:
+            actions.append(action)
+    assert actions == ["delete"]
+    assert not delay.on
+
+
+def test_other_hand_short_pinch_fires_once_after_release():
+    from webswipe.app.controls import ReleaseDelay
+    delay, ctl = ReleaseDelay(120), OtherHandControl(600)
+    actions = []
+    for t in range(0, 501, 50):
+        action = ctl.update(delay.update(t < 150, t), t)
+        if action:
+            actions.append(action)
+    assert actions == ["next"]
+
+
+def test_other_hand_rejects_single_frame_phantom_before_release_delay():
+    from webswipe.app.controls import ReleaseDelay
+    for frame_ms in (33, 100):
+        delay, ctl = ReleaseDelay(80, start_votes=2), OtherHandControl()
+        actions = []
+        for i, detected in enumerate([False, True, False, False, False, False]):
+            action = ctl.update(delay.update(detected, i * frame_ms), i * frame_ms)
+            if action:
+                actions.append(action)
+        assert actions == []
+        assert not delay.on
+
+
+def test_confirmed_other_hand_short_and_held_controls_with_dropout():
+    from webswipe.app.controls import ReleaseDelay
+    for frame_ms in (33, 100):
+        for duration, expected in ((300, "next"), (1000, "delete")):
+            delay, ctl = ReleaseDelay(80, start_votes=2), OtherHandControl()
+            actions = []
+            for t in range(0, duration + 400, frame_ms):
+                detected = t < duration and not (frame_ms == 33 and t == 198)
+                action = ctl.update(delay.update(detected, t), t)
+                if action:
+                    actions.append(action)
+            assert actions == [expected]
+
+
+def test_contact_confirmation_rejects_fist_and_unconfirmed_near_contact():
+    from webswipe.app.controls import ContactAppearanceGate, ReleaseDelay
+    gate, delay, ctl = ContactAppearanceGate(), ReleaseDelay(80, start_votes=2), OtherHandControl()
+    events = []
+    for t in range(0, 1200, 33):
+        on = gate.update(t < 900, {"fist": .95}, active=delay.on)
+        action = ctl.update(delay.update(on, t), t)
+        if action:
+            events.append(action)
+    assert events == []
+
+
+def test_contact_confirmation_survives_classifier_flicker_and_resets():
+    from webswipe.app.controls import ContactAppearanceGate, ReleaseDelay
+    gate, delay, ctl = ContactAppearanceGate(), ReleaseDelay(80, start_votes=2), OtherHandControl()
+    events = []
+    for t in range(0, 1000, 33):
+        scores = {"ok": .7} if t == 0 else {"no_gesture": .8}
+        on = gate.update(t < 700, scores, active=delay.on)
+        action = ctl.update(delay.update(on, t), t)
+        if action:
+            events.append(action)
+    assert events == ["delete"]
+    assert not gate.update(True, {"fist": .9}, active=False)
+
+
+def test_contact_confirmation_short_pinch_and_brief_tracking_loss():
+    from webswipe.app.controls import ContactAppearanceGate, ReleaseDelay
+    gate, delay, ctl = ContactAppearanceGate(), ReleaseDelay(80, start_votes=2), OtherHandControl()
+    events = []
+    for t in range(0, 600, 33):
+        on = gate.update(t < 250 and t != 132, {"ok": .6} if t == 0 else {}, active=delay.on)
+        action = ctl.update(delay.update(on, t), t)
+        if action:
+            events.append(action)
+    assert events == ["next"]

@@ -8,7 +8,7 @@ import time
 import cv2 as cv
 import numpy as np
 
-from .controls import Candidates, OtherHandControl, SwipeSegmenter, SwipeStartBuffer, GuardedStartBuffer
+from .controls import ContactAppearanceGate, Candidates, OtherHandControl, SwipeSegmenter, SwipeStartBuffer, GuardedStartBuffer
 from .cvfpscalc import CvFpsCalc
 from .draw import draw_landmarks, draw_trace, text
 from .keyboard_ui import KeyboardOverlay
@@ -65,14 +65,17 @@ def get_args():
                     help="sustained release needed to finish a swipe (milliseconds)")
     ap.add_argument("--fist-delete", action="store_true",
                     help="enable the legacy extra fist-to-delete shortcut (off by default)")
-    ap.add_argument("--other-pinch", choices=["contact", "same"], default="contact",
-                    help="other-hand controls: contact rule, or same detector mode as typing hand")
+    ap.add_argument("--other-pinch", choices=["contact", "confirmed-contact", "same"], default="contact",
+                    help="other-hand controls: contact, appearance-confirmed contact, or typing-hand detector mode")
     ap.add_argument("--hide-cursor", action="store_true", help="hide cursor and moving key highlight; C toggles live")
     ap.add_argument("--hide-trail", action="store_true", help="hide live swipe trail; T toggles live")
     ap.add_argument("--hide-skeleton", action="store_true", help="hide hand skeleton; H toggles live")
     ap.add_argument("--headless", action="store_true")
     ap.add_argument("--max-frames", type=int, default=0)
-    return ap.parse_args()
+    args = ap.parse_args()
+    if args.other_pinch == "confirmed-contact" and "detector" not in args.pinch:
+        ap.error("--other-pinch confirmed-contact requires a detector pinch mode")
+    return args
 
 
 def load_lexicon_any(path):
@@ -194,6 +197,7 @@ def main():
     words, last_ms = Candidates(), 0.0
     seg, other_ctl = SwipeSegmenter(release_ms=a.release_ms), OtherHandControl()
     other_release = ReleaseDelay(a.release_ms, start_votes=2)
+    other_approval = ContactAppearanceGate(a.det_start)
     trace_img, trace_kb = [], []
     start_buffer = (GuardedStartBuffer(a.start_lookback_ms) if a.guarded_start
                     else SwipeStartBuffer(a.start_lookback_ms))
@@ -292,6 +296,8 @@ def main():
                 o_touch = other_pinch.update(oh.px)[0] if oh is not None else False
                 if a.other_pinch == "contact":
                     o_on = o_touch
+                elif a.other_pinch == "confirmed-contact":
+                    o_on = other_approval.update(o_touch, oh_sc, active=other_release.on)
                 elif a.pinch == "detector":
                     o_on = other_state.update(oh_sc)[0] if oh is not None else False
                 else:
