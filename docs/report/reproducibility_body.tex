@@ -1,0 +1,32 @@
+\suppsection{Reproducibility and selected version}
+The report covers the app after the 11 October 2026 control update. The detector and decoder weights were trained on 10 October and stayed unchanged during that update. Model weights and full camera recordings are stored separately from the documentation archive.
+
+The model files are \nolinkurl{gesture_lighting_20261010.onnx}, \nolinkurl{gesture_crop_20261010.onnx}, \nolinkurl{decoder_personalized_20261010.pt}, and \nolinkurl{hand_landmarker.task}. The selected settings are detector onset 0.5, continuation 0.3, two onset votes from three observations, 80 ms swipe release, 700 ms standard onset lookback, appearance-confirmed left controls, a 10,000-word lexicon, endpoint weight 1, unigram-prior weight 0, and 50 Hz trajectory preprocessing. The fresh-camera reader is enabled. The left-control implementation is identified by its source hash because its temporal rules cannot be captured by a single threshold.
+
+The app uses NumPy 2.5.3, SciPy 1.18.1, OpenCV-contrib 5.0.0.93, MediaPipe 1.0.1, ONNX Runtime 1.30.0, PyTorch 2.14.0, and wordfreq 3.1.1 with Python 3.13. Full hashes and launch arguments are in \nolinkurl{evidence/runtime_snapshot.json}. The primary detector, reference detector, and decoder hashes begin \texttt{0753c406}, \texttt{b3eb1f95}, and \texttt{3a2dba7d}, respectively. We checked packaging and startup without a camera on Linux for the preceding package. For the latest package, we checked that the source matched and the model files were unchanged. We have not tested the Windows and macOS launchers on those platforms.
+
+
+\suppsection{Selected left-hand control rules}
+For the left hand, the established contact path starts after two observed frames with an appearance score of at least 0.3. An additional fast path accepts a strongly supported closure before the contact median catches up. The closing-motion path needs two consecutive observations with pinch scores of at least 0.7. These must show close fingertips moving together from a recently appearance-confirmed open pose. The gap must be at most 0.27, with a decrease of at least 0.07 in normalized gap within 250 ms. There must be no more than 150 ms between the two observations. Fingers resting close together do not meet the motion requirement.
+
+A fast episode can end after sustained geometric separation or 200 ms of confident visual release. This helps stop a short pinch from becoming an unintended delete. The two release timers run independently. A 200 ms re-entry guard reduces duplicate commands. Holding the pinch for 0.6 seconds triggers deletion.
+
+\suppsection{Investigated variants outside the selected configuration}
+The selected demo uses the standard 700 ms evidence-filtered onset buffer. We also tried the experimental \texttt{GuardedStartBuffer} and an online two-component Gaussian-mixture pinch method. Neither is enabled in the selected app. The model still has a fist class from gesture training, but the old fist shortcut is disabled. A held left pinch deletes the word.
+
+
+\suppsection{Normalization and the limits of noise averaging}
+Our SHARK2 comparison uses separate shape and location channels. To normalize shape, we subtract the path's centroid and divide by its RMS radius. A noiseless path keeps the same normalized shape when it is translated or uniformly scaled. The location channel still depends on position. This normalization does not remove perspective changes or preserve the signal-to-noise ratio when the hand appears smaller in the image.
+
+A useful idealized calculation considers fixed templates $T_w$ and independent zero-mean noise $\epsilon_i$ with per-axis variance $\sigma^2$. Without estimating normalization from the noisy observations,
+\begin{equation}
+D_w=\frac{1}{N}\sum_i\lVert x_i+\epsilon_i-T_{w,i}\rVert^2,
+\qquad \mathbb{E}[D_w]=D_w^{\rm clean}+2\sigma^2.
+\end{equation}
+In this idealized model, every candidate receives the same expected additive term. The variance of an averaged ranking margin can decrease as $1/N$ when the contributions are bounded and independent. Our processing changes those assumptions: smoothing correlates errors, resampling interpolates points, and centering and scale use the same noisy samples. The simulation follows approximately inverse-sample variance with RMS normalization. The exact common offset relies on the idealized assumptions. Per-key input also benefits from lexicon correction and performs better at some tested noise levels.
+
+
+\suppsection{Supporting records and numerical audit}
+The accompanying \href{WebSwipe_LaTeX_Source.zip}{\nolinkurl{WebSwipe_LaTeX_Source.zip}} contains the source, evidence, figure inputs, and build instructions. This appendix is also provided as \href{WebSwipe_Reproducibility_Supplement.pdf}{\nolinkurl{WebSwipe_Reproducibility_Supplement.pdf}}.
+
+The source archive includes diagnostic details in \nolinkurl{evidence/diagnostic_detail_notes.tex}, control checks in \nolinkurl{evidence/control_validation_history.tex}, and synthetic results in \nolinkurl{evidence/synthetic_experiment_notes.tex}. The calculations behind the reported statistics are in \nolinkurl{evidence/review_numerical_audit.json}. The archived control checks include 15 focused software tests for the selected update.

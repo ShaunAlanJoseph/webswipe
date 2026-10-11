@@ -1,0 +1,73 @@
+{
+  "case_open": {
+    "frame": {
+      "frame_id": 1491,
+      "acquired_at": 51.1292642490007,
+      "video_index": 1491
+    },
+    "crop_xyxy": [
+      0,
+      312,
+      203,
+      480
+    ],
+    "mirrored": true
+  },
+  "case_pinch": {
+    "frame": {
+      "frame_id": 1496,
+      "acquired_at": 51.29746093199901,
+      "video_index": 1496
+    },
+    "crop_xyxy": [
+      0,
+      304,
+      208,
+      480
+    ],
+    "mirrored": true
+  },
+  "case_release": {
+    "frame": {
+      "frame_id": 1504,
+      "acquired_at": 51.56520629499937,
+      "video_index": 1504
+    },
+    "crop_xyxy": [
+      0,
+      286,
+      228,
+      480
+    ],
+    "mirrored": true
+  },
+  "app_replay": {
+    "frame": {
+      "frame_id": 622,
+      "acquired_at": 21.929137990000527,
+      "video_index": 622
+    },
+    "app_t_ms": 16524,
+    "processed_at": 21.986284048000016,
+    "renderer": "Actual webswipe.app.main drawing path with cached landmarks and left scores; no inference or live camera. FPS label rounded from recorded session rate; candidate words preloaded as in the diagnostic session.",
+    "source_sha256": "7f8df0661296c727dac429a2d432817f2af9dabdb92e3e14ba4023f5560c28d9"
+  },
+  "app_replay_standing": {
+    "recording": "data/benchmark_20261010/standing",
+    "frame": {
+      "frame_index": 900,
+      "t_ms": 30264,
+      "captured_unix": 1791628549.1053991,
+      "space_held": false,
+      "intended_active": false,
+      "trial_id": null,
+      "target": "world",
+      "side": "Right",
+      "kind": "word",
+      "focus_ok": true
+    },
+    "mirrored": true,
+    "input_sha256": "bb9ef43cec91016faa79af57541fc60d1caa9b85ea29b0b7a18ecdebbd47da77",
+    "renderer": "Frozen KeyboardOverlay.draw and draw.text helpers; keyboard and display-toggle hint only. No tracking, inference, prediction, or timing measurement. Enlarged details retain original app_replay.png."
+  }
+}

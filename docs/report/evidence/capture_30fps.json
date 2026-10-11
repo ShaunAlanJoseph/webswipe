@@ -1,0 +1,56 @@
+{
+  "sitting_baseline": {
+    "n": 15,
+    "missed": 3,
+    "multiple": 3,
+    "merged_words": 1,
+    "pending_words": 0,
+    "single_80pct_span": 2,
+    "warning": "Matches are segments with at least 4 points (the app commit minimum). Span/offsets are relative to intention markers, not physical contact."
+  },
+  "sitting_candidate": {
+    "n": 15,
+    "missed": 0,
+    "multiple": 10,
+    "merged_words": 1,
+    "pending_words": 0,
+    "single_80pct_span": 2,
+    "warning": "Matches are segments with at least 4 points (the app commit minimum). Span/offsets are relative to intention markers, not physical contact."
+  },
+  "sitting_crop": {
+    "n": 15,
+    "missed": 0,
+    "multiple": 3,
+    "merged_words": 0,
+    "pending_words": 0,
+    "single_80pct_span": 12,
+    "warning": "Matches are segments with at least 4 points (the app commit minimum). Span/offsets are relative to intention markers, not physical contact."
+  },
+  "standing_baseline": {
+    "n": 14,
+    "missed": 2,
+    "multiple": 1,
+    "merged_words": 0,
+    "pending_words": 1,
+    "single_80pct_span": 6,
+    "warning": "Matches are segments with at least 4 points (the app commit minimum). Span/offsets are relative to intention markers, not physical contact."
+  },
+  "standing_candidate": {
+    "n": 14,
+    "missed": 0,
+    "multiple": 4,
+    "merged_words": 0,
+    "pending_words": 1,
+    "single_80pct_span": 6,
+    "warning": "Matches are segments with at least 4 points (the app commit minimum). Span/offsets are relative to intention markers, not physical contact."
+  },
+  "standing_crop": {
+    "n": 14,
+    "missed": 0,
+    "multiple": 0,
+    "merged_words": 2,
+    "pending_words": 1,
+    "single_80pct_span": 11,
+    "warning": "Matches are segments with at least 4 points (the app commit minimum). Span/offsets are relative to intention markers, not physical contact."
+  }
+}

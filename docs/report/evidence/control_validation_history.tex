@@ -1,0 +1,14 @@
+% Supporting notes from the preceding report revision; not included in the main PDF.
+% All numbers below refer to the archived selected-version evidence.
+\textbf{Unintended control-hand pinch.} Separated fingertips can overlap in the image and trigger a landmark-only contact rule. The earlier appearance-confirmed rule reduced unintended commands from four to zero in a 20-second seated non-pinching interval. It retained an action on 19/20 seated and 14/14 standing marked pinches. An earlier 10 fps control check retained 27/29. These figures count whether any action occurred; they do not mean that all short pinches cycled and all held pinches deleted correctly.
+
+\textbf{Quick left pinches.} A later 10-pinch recording initially gave 8/10 correct cycles at its recorded rate, and 7/10 and 8/10 in two fresh-tracking 10 fps replays. A first logic update brought all three replays to 10/10, but a subsequent live check still missed pinches. We then recorded the actual app decisions alongside the camera stream.
+
+That live diagnostic contains 11 prompted attempts: eight cycle commands, two missed brief pinches, and one delete. Video review shows that the deleted attempt was held for about 0.9 seconds, so deletion was consistent with the 0.6-second hold rule. Of the ten brief pinches, the app recognized eight. In one miss, appearance evidence was below the fast-path confidence threshold and the contact median never switched on. In the other, the raw fingertip gap narrowly missed a stricter shortcut and the hand had not recently opened widely. Figure~\ref{fig:pinchcase} shows the first of these two misses.
+
+The latest update adds the two-observation closing-motion path described in Section~\ref{sec:pinch}. Replaying the exact live observations and timestamps now produces all ten cycle commands and the same correct held delete. The six commands before the prompted trials are unchanged and are not labeled false positives. All seven older cached replays retain their action sequences; one older held-delete event occurs 36 ms earlier. These recordings were used to develop the change. A fresh live check of this last revision is still needed.
+
+
+
+\textbf{Software checks.} Validation counts refer to particular revisions. The 10 October appearance-confirmed control update passed 50 tests and preserved 88 earlier word traces. The first 11 October quick-pinch update passed 48 targeted tests and preserved 162 right-hand traces in four recorded app-loop checks. The latest afternoon change passes 15 focused tests; its actions also match a 1,466-frame replay through the actual app loop. We do not add these overlapping test counts together. They check implementation behavior, not recognition accuracy for new users.
+

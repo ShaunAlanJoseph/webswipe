@@ -1,0 +1,16 @@
+% Supporting numerical detail from the preceding report revision; not included in the main PDF.
+\subsection{Synthetic ablations and interpretation}
+Synthetic experiments generate ideal keyboard paths and apply assumed noise. They help test explanations and parameter choices without replacing real camera evidence. Figure~\ref{fig:synthetic} shows representative results from the saved numerical files.
+
+
+
+\textbf{Shape and location evidence.} In E5, at noise $\sigma=0.4$ key widths, shape-plus-location reaches 90.0\% top-1, compared with 85.0\% for shape alone. Lexicon-corrected per-key decoding reaches 100\% in this particular synthetic condition and remains stronger through $\sigma=1.0$. At $\sigma=1.2$, the gesture decoder reaches 80.5\%, compared with 76.0\% for corrected per-key decoding. Thus, the saved crossover supports an advantage only in the tested high-noise regime, not universal superiority of word gestures.
+
+\textbf{Distance and normalization.} E2 obtains 100\% at all tested distances without noise. With fixed image-space noise, accuracy decreases from approximately 99.3\% at 30 cm to 92.7\% at 90 cm, with sampling variation between intermediate conditions. Removing geometric scale does not recover image detail lost as a hand becomes smaller. In E6, log--log ranking-variance slopes are $-0.664$ for bounding-box normalization and $-0.977$ for RMS normalization. The RMS result is consistent with approximate $1/N$ scaling in this simulation, but its candidate-offset spread remains nonzero.
+
+\textbf{Combined disturbances and vocabulary size.} In E7, the shape-plus-location decoder obtains 94.0\% under independent noise alone, 90.0\% with drift, 90.4\% with timing error, 85.2\% with speed-dependent noise, and 82.4\% when disturbances are combined. Shape-only performance in the combined condition is 70.4\%. E8 shows that vocabulary growth is more consequential than increasing sample count beyond roughly 16--32 points. The deployed neural model nevertheless uses 50 points to preserve compatibility with its pretrained feature representation.
+
+\textbf{Smoothing and pinch detection.} E9 reports a useful jitter--lag trade-off for the One Euro filter, motivating its use for cursor smoothing. In the median-filtered E10b pinch simulation, at 90 cm in normal light, the online GMM variant obtains approximately 0.96 F1, versus 0.88 for scale normalization alone and 0.67 for a fixed-pixel threshold. Under simulated low light at that distance, GMM F1 falls to approximately 0.51. The noise and outlier model is assumed, so these figures do not quantify the installed detector's real-world pinch F1.
+
+\textbf{Latency.} E4 records a brute-force synthetic template decoder increasing from approximately 0.345 ms at a 500-word lexicon to 6.307 ms at 10,000 words on the machine used for that experiment. These values describe only that decoder implementation. They exclude tracking, crop inference, camera buffering, and display time, and therefore cannot be used as WebSwipe end-to-end latency.
+

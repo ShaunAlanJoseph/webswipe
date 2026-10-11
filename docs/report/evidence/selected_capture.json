@@ -1,0 +1,2119 @@
+{
+  "old_sitting": {
+    "development": {
+      "n": 20,
+      "missed": 0,
+      "multiple": 0,
+      "merged_words": 0,
+      "pending_words": 0,
+      "single_80pct_span": 20,
+      "words": [
+        {
+          "id": 20,
+          "target": "thanks",
+          "matches": [
+            1
+          ],
+          "all_fragments": [
+            1
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.995,
+          "start_offset_ms": 22,
+          "end_offset_ms": 155
+        },
+        {
+          "id": 21,
+          "target": "window",
+          "matches": [
+            2
+          ],
+          "all_fragments": [
+            2
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -10,
+          "end_offset_ms": 189
+        },
+        {
+          "id": 22,
+          "target": "computer",
+          "matches": [
+            3
+          ],
+          "all_fragments": [
+            3
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.998,
+          "start_offset_ms": -11,
+          "end_offset_ms": 124
+        },
+        {
+          "id": 23,
+          "target": "typing",
+          "matches": [
+            4
+          ],
+          "all_fragments": [
+            4
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.959,
+          "start_offset_ms": 122,
+          "end_offset_ms": 124
+        },
+        {
+          "id": 24,
+          "target": "again",
+          "matches": [
+            5
+          ],
+          "all_fragments": [
+            5
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -10,
+          "end_offset_ms": 189
+        },
+        {
+          "id": 25,
+          "target": "small",
+          "matches": [
+            6
+          ],
+          "all_fragments": [
+            6
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.993,
+          "start_offset_ms": 24,
+          "end_offset_ms": 762
+        },
+        {
+          "id": 26,
+          "target": "happy",
+          "matches": [
+            9
+          ],
+          "all_fragments": [
+            9
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -11,
+          "end_offset_ms": 160
+        },
+        {
+          "id": 27,
+          "target": "book",
+          "matches": [
+            10
+          ],
+          "all_fragments": [
+            10
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.989,
+          "start_offset_ms": 21,
+          "end_offset_ms": 255
+        },
+        {
+          "id": 28,
+          "target": "room",
+          "matches": [
+            11
+          ],
+          "all_fragments": [
+            11
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.976,
+          "start_offset_ms": 56,
+          "end_offset_ms": 425
+        },
+        {
+          "id": 29,
+          "target": "today",
+          "matches": [
+            12
+          ],
+          "all_fragments": [
+            12
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.984,
+          "start_offset_ms": 56,
+          "end_offset_ms": 224
+        },
+        {
+          "id": 30,
+          "target": "hello",
+          "matches": [
+            13
+          ],
+          "all_fragments": [
+            13
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.991,
+          "start_offset_ms": 22,
+          "end_offset_ms": 594
+        },
+        {
+          "id": 31,
+          "target": "little",
+          "matches": [
+            14
+          ],
+          "all_fragments": [
+            14
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -887,
+          "end_offset_ms": 158
+        },
+        {
+          "id": 32,
+          "target": "please",
+          "matches": [
+            17
+          ],
+          "all_fragments": [
+            17
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.996,
+          "start_offset_ms": -483,
+          "end_offset_ms": 121
+        },
+        {
+          "id": 33,
+          "target": "night",
+          "matches": [
+            18
+          ],
+          "all_fragments": [
+            18
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.972,
+          "start_offset_ms": 54,
+          "end_offset_ms": 122
+        },
+        {
+          "id": 34,
+          "target": "is",
+          "matches": [
+            20
+          ],
+          "all_fragments": [
+            20
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.994,
+          "start_offset_ms": -110,
+          "end_offset_ms": 126
+        },
+        {
+          "id": 35,
+          "target": "there",
+          "matches": [
+            21
+          ],
+          "all_fragments": [
+            21
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.962,
+          "start_offset_ms": 55,
+          "end_offset_ms": 124
+        },
+        {
+          "id": 36,
+          "target": "his",
+          "matches": [
+            22
+          ],
+          "all_fragments": [
+            22
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.978,
+          "start_offset_ms": 26,
+          "end_offset_ms": 123
+        },
+        {
+          "id": 37,
+          "target": "good",
+          "matches": [
+            23
+          ],
+          "all_fragments": [
+            23
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.988,
+          "start_offset_ms": 21,
+          "end_offset_ms": 157
+        },
+        {
+          "id": 38,
+          "target": "world",
+          "matches": [
+            24
+          ],
+          "all_fragments": [
+            24
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -43,
+          "end_offset_ms": 155
+        },
+        {
+          "id": 39,
+          "target": "look",
+          "matches": [
+            25
+          ],
+          "all_fragments": [
+            25
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.991,
+          "start_offset_ms": -750,
+          "end_offset_ms": 122
+        }
+      ],
+      "warning": "Matches are segments with at least 4 points (the app commit minimum). Span/offsets are relative to intention markers, not physical contact."
+    },
+    "recheck": {
+      "n": 15,
+      "missed": 0,
+      "multiple": 3,
+      "merged_words": 0,
+      "pending_words": 0,
+      "single_80pct_span": 12,
+      "words": [
+        {
+          "id": 40,
+          "target": "home",
+          "matches": [
+            26
+          ],
+          "all_fragments": [
+            26
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.982,
+          "start_offset_ms": 24,
+          "end_offset_ms": 125
+        },
+        {
+          "id": 41,
+          "target": "work",
+          "matches": [
+            27
+          ],
+          "all_fragments": [
+            27
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -46,
+          "end_offset_ms": 357
+        },
+        {
+          "id": 42,
+          "target": "water",
+          "matches": [
+            28
+          ],
+          "all_fragments": [
+            28
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -79,
+          "end_offset_ms": 157
+        },
+        {
+          "id": 43,
+          "target": "paper",
+          "matches": [
+            29,
+            30
+          ],
+          "all_fragments": [
+            29,
+            30
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.556,
+          "start_offset_ms": -1018,
+          "end_offset_ms": -1118
+        },
+        {
+          "id": 44,
+          "target": "light",
+          "matches": [
+            31
+          ],
+          "all_fragments": [
+            31
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -783,
+          "end_offset_ms": 157
+        },
+        {
+          "id": 45,
+          "target": "right",
+          "matches": [
+            32
+          ],
+          "all_fragments": [
+            32
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.994,
+          "start_offset_ms": -46,
+          "end_offset_ms": 125
+        },
+        {
+          "id": 46,
+          "target": "left",
+          "matches": [
+            33
+          ],
+          "all_fragments": [
+            33
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.971,
+          "start_offset_ms": -1085,
+          "end_offset_ms": 90
+        },
+        {
+          "id": 47,
+          "target": "people",
+          "matches": [
+            34,
+            35
+          ],
+          "all_fragments": [
+            34,
+            35
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.546,
+          "start_offset_ms": -618,
+          "end_offset_ms": -1119
+        },
+        {
+          "id": 48,
+          "target": "school",
+          "matches": [
+            36
+          ],
+          "all_fragments": [
+            36
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.988,
+          "start_offset_ms": 21,
+          "end_offset_ms": 526
+        },
+        {
+          "id": 49,
+          "target": "morning",
+          "matches": [
+            37
+          ],
+          "all_fragments": [
+            37
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.996,
+          "start_offset_ms": -784,
+          "end_offset_ms": 125
+        },
+        {
+          "id": 50,
+          "target": "thanks",
+          "matches": [
+            38
+          ],
+          "all_fragments": [
+            38
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.993,
+          "start_offset_ms": 22,
+          "end_offset_ms": 158
+        },
+        {
+          "id": 51,
+          "target": "window",
+          "matches": [
+            39
+          ],
+          "all_fragments": [
+            39
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -648,
+          "end_offset_ms": 189
+        },
+        {
+          "id": 52,
+          "target": "computer",
+          "matches": [
+            40
+          ],
+          "all_fragments": [
+            40
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -685,
+          "end_offset_ms": 157
+        },
+        {
+          "id": 53,
+          "target": "typing",
+          "matches": [
+            41,
+            42
+          ],
+          "all_fragments": [
+            41,
+            42
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.577,
+          "start_offset_ms": 1065,
+          "end_offset_ms": 225
+        },
+        {
+          "id": 54,
+          "target": "again",
+          "matches": [
+            43
+          ],
+          "all_fragments": [
+            43
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -247,
+          "end_offset_ms": 493
+        }
+      ],
+      "warning": "Matches are segments with at least 4 points (the app commit minimum). Span/offsets are relative to intention markers, not physical contact."
+    },
+    "physical_release": {
+      "n": 34,
+      "on": 0,
+      "active": 0,
+      "samples": [
+        {
+          "t_ms": 183013,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 183213,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 183417,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 189497,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 189697,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 189901,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 194169,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 194369,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 197293,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 197493,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 197697,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 200821,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 201021,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 201225,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 204313,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 204517,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 208245,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 208449,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 208649,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 215369,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 215569,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 215773,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 219537,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 219737,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 219937,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 224509,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 224709,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 224913,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 229381,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 229581,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 229785,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 232909,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 233109,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 233313,
+          "on": false,
+          "active": false
+        }
+      ]
+    },
+    "cadence_12fps": {
+      "0": {
+        "n": 20,
+        "missed": 0,
+        "multiple": 0,
+        "merged_words": 0,
+        "pending_words": 0,
+        "single_80pct_span": 20
+      },
+      "0.041666666666666664": {
+        "n": 20,
+        "missed": 0,
+        "multiple": 0,
+        "merged_words": 0,
+        "pending_words": 0,
+        "single_80pct_span": 20
+      }
+    }
+  },
+  "old_standing": {
+    "development": {
+      "n": 25,
+      "missed": 0,
+      "multiple": 0,
+      "merged_words": 1,
+      "pending_words": 1,
+      "single_80pct_span": 24,
+      "words": [
+        {
+          "id": 24,
+          "target": "again",
+          "matches": [
+            2
+          ],
+          "all_fragments": [
+            2
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -214,
+          "end_offset_ms": 422
+        },
+        {
+          "id": 25,
+          "target": "small",
+          "matches": [
+            3
+          ],
+          "all_fragments": [
+            3
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -81,
+          "end_offset_ms": 726
+        },
+        {
+          "id": 26,
+          "target": "happy",
+          "matches": [
+            5
+          ],
+          "all_fragments": [
+            5
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -13,
+          "end_offset_ms": 190
+        },
+        {
+          "id": 27,
+          "target": "book",
+          "matches": [
+            6
+          ],
+          "all_fragments": [
+            6
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -14,
+          "end_offset_ms": 723
+        },
+        {
+          "id": 28,
+          "target": "room",
+          "matches": [
+            7
+          ],
+          "all_fragments": [
+            7
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -46,
+          "end_offset_ms": 727
+        },
+        {
+          "id": 29,
+          "target": "today",
+          "matches": [
+            8
+          ],
+          "all_fragments": [
+            8
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.991,
+          "start_offset_ms": 19,
+          "end_offset_ms": 121
+        },
+        {
+          "id": 30,
+          "target": "hello",
+          "matches": [
+            10
+          ],
+          "all_fragments": [
+            10
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.98,
+          "start_offset_ms": 56,
+          "end_offset_ms": 592
+        },
+        {
+          "id": 31,
+          "target": "little",
+          "matches": [
+            11
+          ],
+          "all_fragments": [
+            11
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -818,
+          "end_offset_ms": 152
+        },
+        {
+          "id": 32,
+          "target": "please",
+          "matches": [
+            12
+          ],
+          "all_fragments": [
+            12
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.996,
+          "start_offset_ms": -888,
+          "end_offset_ms": 123
+        },
+        {
+          "id": 33,
+          "target": "night",
+          "matches": [
+            13
+          ],
+          "all_fragments": [
+            13
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -517,
+          "end_offset_ms": 155
+        },
+        {
+          "id": 34,
+          "target": "is",
+          "matches": [
+            14
+          ],
+          "all_fragments": [
+            14
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -720,
+          "end_offset_ms": 189
+        },
+        {
+          "id": 35,
+          "target": "there",
+          "matches": [
+            15
+          ],
+          "all_fragments": [
+            15
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.958,
+          "start_offset_ms": 85,
+          "end_offset_ms": 153
+        },
+        {
+          "id": 36,
+          "target": "his",
+          "matches": [
+            16
+          ],
+          "all_fragments": [
+            16
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.988,
+          "start_offset_ms": 20,
+          "end_offset_ms": 254
+        },
+        {
+          "id": 37,
+          "target": "good",
+          "matches": [
+            17
+          ],
+          "all_fragments": [
+            17
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -13,
+          "end_offset_ms": 156
+        },
+        {
+          "id": 38,
+          "target": "world",
+          "matches": [
+            18
+          ],
+          "all_fragments": [
+            18
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.995,
+          "start_offset_ms": 20,
+          "end_offset_ms": 153
+        },
+        {
+          "id": 39,
+          "target": "look",
+          "matches": [
+            19
+          ],
+          "all_fragments": [
+            19
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -585,
+          "end_offset_ms": 727
+        },
+        {
+          "id": 40,
+          "target": "home",
+          "matches": [
+            20
+          ],
+          "all_fragments": [
+            20
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.995,
+          "start_offset_ms": -113,
+          "end_offset_ms": 119
+        },
+        {
+          "id": 41,
+          "target": "work",
+          "matches": [
+            21
+          ],
+          "all_fragments": [
+            21
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.992,
+          "start_offset_ms": 19,
+          "end_offset_ms": 690
+        },
+        {
+          "id": 42,
+          "target": "water",
+          "matches": [
+            22
+          ],
+          "all_fragments": [
+            22
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.971,
+          "start_offset_ms": 51,
+          "end_offset_ms": 153
+        },
+        {
+          "id": 43,
+          "target": "paper",
+          "matches": [
+            23
+          ],
+          "all_fragments": [
+            23
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.975,
+          "start_offset_ms": -684,
+          "end_offset_ms": 54
+        },
+        {
+          "id": 44,
+          "target": "light",
+          "matches": [
+            24
+          ],
+          "all_fragments": [
+            24
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -719,
+          "end_offset_ms": 222
+        },
+        {
+          "id": 45,
+          "target": "right",
+          "matches": [
+            27
+          ],
+          "all_fragments": [
+            27
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -12,
+          "end_offset_ms": 320
+        },
+        {
+          "id": 46,
+          "target": "left",
+          "matches": [
+            28
+          ],
+          "all_fragments": [
+            28
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -617,
+          "end_offset_ms": 155
+        },
+        {
+          "id": 47,
+          "target": "people",
+          "matches": [
+            29
+          ],
+          "all_fragments": [
+            29
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -752,
+          "end_offset_ms": 153
+        },
+        {
+          "id": 48,
+          "target": "school",
+          "matches": [
+            30
+          ],
+          "all_fragments": [
+            30
+          ],
+          "merged_with": [
+            49
+          ],
+          "pending_at_window_end": true,
+          "span_coverage": 1.0,
+          "start_offset_ms": -80,
+          "end_offset_ms": 4120
+        }
+      ],
+      "warning": "Matches are segments with at least 4 points (the app commit minimum). Span/offsets are relative to intention markers, not physical contact."
+    },
+    "recheck": {
+      "n": 14,
+      "missed": 0,
+      "multiple": 0,
+      "merged_words": 2,
+      "pending_words": 1,
+      "single_80pct_span": 11,
+      "words": [
+        {
+          "id": 51,
+          "target": "window",
+          "matches": [
+            33
+          ],
+          "all_fragments": [
+            33
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.984,
+          "start_offset_ms": 56,
+          "end_offset_ms": 156
+        },
+        {
+          "id": 52,
+          "target": "computer",
+          "matches": [
+            34
+          ],
+          "all_fragments": [
+            34
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -12,
+          "end_offset_ms": 188
+        },
+        {
+          "id": 53,
+          "target": "typing",
+          "matches": [
+            35
+          ],
+          "all_fragments": [
+            35
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.988,
+          "start_offset_ms": 20,
+          "end_offset_ms": 122
+        },
+        {
+          "id": 54,
+          "target": "again",
+          "matches": [
+            36
+          ],
+          "all_fragments": [
+            36
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -215,
+          "end_offset_ms": 726
+        },
+        {
+          "id": 55,
+          "target": "small",
+          "matches": [
+            37
+          ],
+          "all_fragments": [
+            37
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -684,
+          "end_offset_ms": 858
+        },
+        {
+          "id": 56,
+          "target": "happy",
+          "matches": [
+            38
+          ],
+          "all_fragments": [
+            38
+          ],
+          "merged_with": [
+            57
+          ],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -316,
+          "end_offset_ms": 3615
+        },
+        {
+          "id": 57,
+          "target": "book",
+          "matches": [
+            38
+          ],
+          "all_fragments": [
+            38
+          ],
+          "merged_with": [
+            56
+          ],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -4114,
+          "end_offset_ms": 725
+        },
+        {
+          "id": 58,
+          "target": "room",
+          "matches": [
+            39
+          ],
+          "all_fragments": [
+            39
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -48,
+          "end_offset_ms": 222
+        },
+        {
+          "id": 59,
+          "target": "today",
+          "matches": [
+            41
+          ],
+          "all_fragments": [
+            41
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.996,
+          "start_offset_ms": -285,
+          "end_offset_ms": 120
+        },
+        {
+          "id": 60,
+          "target": "hello",
+          "matches": [
+            43
+          ],
+          "all_fragments": [
+            43
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -15,
+          "end_offset_ms": 521
+        },
+        {
+          "id": 61,
+          "target": "little",
+          "matches": [
+            44
+          ],
+          "all_fragments": [
+            44
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -516,
+          "end_offset_ms": 154
+        },
+        {
+          "id": 62,
+          "target": "please",
+          "matches": [
+            46
+          ],
+          "all_fragments": [
+            46
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.995,
+          "start_offset_ms": -50,
+          "end_offset_ms": 124
+        },
+        {
+          "id": 63,
+          "target": "night",
+          "matches": [
+            47
+          ],
+          "all_fragments": [
+            47
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.971,
+          "start_offset_ms": -216,
+          "end_offset_ms": 86
+        },
+        {
+          "id": 64,
+          "target": "is",
+          "matches": [
+            48
+          ],
+          "all_fragments": [
+            48
+          ],
+          "merged_with": [],
+          "pending_at_window_end": true,
+          "span_coverage": 1.0,
+          "start_offset_ms": -481,
+          "end_offset_ms": 557
+        }
+      ],
+      "warning": "Matches are segments with at least 4 points (the app commit minimum). Span/offsets are relative to intention markers, not physical contact."
+    },
+    "physical_release": {
+      "n": 23,
+      "on": 2,
+      "active": 2,
+      "samples": [
+        {
+          "t_ms": 192617,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 192820,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 193021,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 197557,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 197761,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 197961,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 201625,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 220305,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 220505,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 220709,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 224809,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 225009,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 225209,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 231561,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 231761,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 235089,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 235289,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 235493,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 237845,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 238045,
+          "on": false,
+          "active": false
+        },
+        {
+          "t_ms": 240061,
+          "on": true,
+          "active": true
+        },
+        {
+          "t_ms": 240265,
+          "on": true,
+          "active": true
+        },
+        {
+          "t_ms": 240465,
+          "on": false,
+          "active": false
+        }
+      ]
+    },
+    "cadence_12fps": {
+      "0": {
+        "n": 25,
+        "missed": 0,
+        "multiple": 2,
+        "merged_words": 0,
+        "pending_words": 1,
+        "single_80pct_span": 22
+      },
+      "0.041666666666666664": {
+        "n": 25,
+        "missed": 0,
+        "multiple": 0,
+        "merged_words": 2,
+        "pending_words": 1,
+        "single_80pct_span": 22
+      }
+    }
+  },
+  "new_standing": {
+    "development": {
+      "n": 23,
+      "missed": 0,
+      "multiple": 0,
+      "merged_words": 0,
+      "pending_words": 0,
+      "single_80pct_span": 23,
+      "words": [
+        {
+          "id": 22,
+          "target": "computer",
+          "matches": [
+            32
+          ],
+          "all_fragments": [
+            32
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.977,
+          "start_offset_ms": 53,
+          "end_offset_ms": 86
+        },
+        {
+          "id": 23,
+          "target": "typing",
+          "matches": [
+            33
+          ],
+          "all_fragments": [
+            33
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.961,
+          "start_offset_ms": 87,
+          "end_offset_ms": 88
+        },
+        {
+          "id": 24,
+          "target": "again",
+          "matches": [
+            34
+          ],
+          "all_fragments": [
+            34
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.985,
+          "start_offset_ms": -78,
+          "end_offset_ms": 86
+        },
+        {
+          "id": 25,
+          "target": "small",
+          "matches": [
+            35
+          ],
+          "all_fragments": [
+            35
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.986,
+          "start_offset_ms": 53,
+          "end_offset_ms": 423
+        },
+        {
+          "id": 26,
+          "target": "happy",
+          "matches": [
+            37
+          ],
+          "all_fragments": [
+            37
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -15,
+          "end_offset_ms": 155
+        },
+        {
+          "id": 27,
+          "target": "book",
+          "matches": [
+            38
+          ],
+          "all_fragments": [
+            38
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.986,
+          "start_offset_ms": 22,
+          "end_offset_ms": 390
+        },
+        {
+          "id": 28,
+          "target": "room",
+          "matches": [
+            39
+          ],
+          "all_fragments": [
+            39
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.991,
+          "start_offset_ms": 18,
+          "end_offset_ms": 155
+        },
+        {
+          "id": 29,
+          "target": "today",
+          "matches": [
+            40
+          ],
+          "all_fragments": [
+            40
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.989,
+          "start_offset_ms": 19,
+          "end_offset_ms": 120
+        },
+        {
+          "id": 30,
+          "target": "hello",
+          "matches": [
+            41
+          ],
+          "all_fragments": [
+            41
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.965,
+          "start_offset_ms": 87,
+          "end_offset_ms": 290
+        },
+        {
+          "id": 31,
+          "target": "little",
+          "matches": [
+            42
+          ],
+          "all_fragments": [
+            42
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -721,
+          "end_offset_ms": 153
+        },
+        {
+          "id": 32,
+          "target": "please",
+          "matches": [
+            45
+          ],
+          "all_fragments": [
+            45
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.995,
+          "start_offset_ms": -452,
+          "end_offset_ms": 123
+        },
+        {
+          "id": 33,
+          "target": "night",
+          "matches": [
+            46
+          ],
+          "all_fragments": [
+            46
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.971,
+          "start_offset_ms": -148,
+          "end_offset_ms": 88
+        },
+        {
+          "id": 34,
+          "target": "is",
+          "matches": [
+            47
+          ],
+          "all_fragments": [
+            47
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.968,
+          "start_offset_ms": -786,
+          "end_offset_ms": 87
+        },
+        {
+          "id": 35,
+          "target": "there",
+          "matches": [
+            48
+          ],
+          "all_fragments": [
+            48
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.922,
+          "start_offset_ms": 51,
+          "end_offset_ms": 54
+        },
+        {
+          "id": 36,
+          "target": "his",
+          "matches": [
+            49
+          ],
+          "all_fragments": [
+            49
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -46,
+          "end_offset_ms": 156
+        },
+        {
+          "id": 37,
+          "target": "good",
+          "matches": [
+            50
+          ],
+          "all_fragments": [
+            50
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.964,
+          "start_offset_ms": 52,
+          "end_offset_ms": 122
+        },
+        {
+          "id": 38,
+          "target": "world",
+          "matches": [
+            51
+          ],
+          "all_fragments": [
+            51
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.996,
+          "start_offset_ms": -47,
+          "end_offset_ms": 119
+        },
+        {
+          "id": 39,
+          "target": "look",
+          "matches": [
+            52
+          ],
+          "all_fragments": [
+            52
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -687,
+          "end_offset_ms": 154
+        },
+        {
+          "id": 40,
+          "target": "home",
+          "matches": [
+            53
+          ],
+          "all_fragments": [
+            53
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.99,
+          "start_offset_ms": 20,
+          "end_offset_ms": 154
+        },
+        {
+          "id": 41,
+          "target": "work",
+          "matches": [
+            54
+          ],
+          "all_fragments": [
+            54
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 1.0,
+          "start_offset_ms": -14,
+          "end_offset_ms": 154
+        },
+        {
+          "id": 42,
+          "target": "water",
+          "matches": [
+            55
+          ],
+          "all_fragments": [
+            55
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.941,
+          "start_offset_ms": 89,
+          "end_offset_ms": 122
+        },
+        {
+          "id": 43,
+          "target": "paper",
+          "matches": [
+            56
+          ],
+          "all_fragments": [
+            56
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.996,
+          "start_offset_ms": -618,
+          "end_offset_ms": 119
+        },
+        {
+          "id": 44,
+          "target": "light",
+          "matches": [
+            57
+          ],
+          "all_fragments": [
+            57
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.972,
+          "start_offset_ms": -553,
+          "end_offset_ms": 87
+        }
+      ],
+      "warning": "Matches are segments with at least 4 points (the app commit minimum). Span/offsets are relative to intention markers, not physical contact."
+    },
+    "recheck": {
+      "n": 15,
+      "missed": 0,
+      "multiple": 0,
+      "merged_words": 0,
+      "pending_words": 0,
+      "single_80pct_span": 15,
+      "words": [
+        {
+          "id": 46,
+          "target": "left",
+          "matches": [
+            59
+          ],
+          "all_fragments": [
+            59
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.953,
+          "start_offset_ms": -483,
+          "end_offset_ms": 54
+        },
+        {
+          "id": 47,
+          "target": "people",
+          "matches": [
+            60
+          ],
+          "all_fragments": [
+            60
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.995,
+          "start_offset_ms": -655,
+          "end_offset_ms": 120
+        },
+        {
+          "id": 48,
+          "target": "school",
+          "matches": [
+            61
+          ],
+          "all_fragments": [
+            61
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.945,
+          "start_offset_ms": 118,
+          "end_offset_ms": 190
+        },
+        {
+          "id": 49,
+          "target": "morning",
+          "matches": [
+            62
+          ],
+          "all_fragments": [
+            62
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.987,
+          "start_offset_ms": -719,
+          "end_offset_ms": 87
+        },
+        {
+          "id": 50,
+          "target": "thanks",
+          "matches": [
+            63
+          ],
+          "all_fragments": [
+            63
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.989,
+          "start_offset_ms": 17,
+          "end_offset_ms": 122
+        },
+        {
+          "id": 51,
+          "target": "window",
+          "matches": [
+            64
+          ],
+          "all_fragments": [
+            64
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.974,
+          "start_offset_ms": 53,
+          "end_offset_ms": 89
+        },
+        {
+          "id": 52,
+          "target": "computer",
+          "matches": [
+            65
+          ],
+          "all_fragments": [
+            65
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.964,
+          "start_offset_ms": 86,
+          "end_offset_ms": 86
+        },
+        {
+          "id": 53,
+          "target": "typing",
+          "matches": [
+            66
+          ],
+          "all_fragments": [
+            66
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.957,
+          "start_offset_ms": 50,
+          "end_offset_ms": 89
+        },
+        {
+          "id": 54,
+          "target": "again",
+          "matches": [
+            67
+          ],
+          "all_fragments": [
+            67
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.957,
+          "start_offset_ms": 55,
+          "end_offset_ms": 85
+        },
+        {
+          "id": 55,
+          "target": "small",
+          "matches": [
+            68
+          ],
+          "all_fragments": [
+            68
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.992,
+          "start_offset_ms": 19,
+          "end_offset_ms": 489
+        },
+        {
+          "id": 56,
+          "target": "happy",
+          "matches": [
+            69
+          ],
+          "all_fragments": [
+            69
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.978,
+          "start_offset_ms": 19,
+          "end_offset_ms": 87
+        },
+        {
+          "id": 57,
+          "target": "book",
+          "matches": [
+            70
+          ],
+          "all_fragments": [
+            70
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.961,
+          "start_offset_ms": 21,
+          "end_offset_ms": 85
+        },
+        {
+          "id": 58,
+          "target": "room",
+          "matches": [
+            71
+          ],
+          "all_fragments": [
+            71
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.993,
+          "start_offset_ms": -13,
+          "end_offset_ms": 122
+        },
+        {
+          "id": 59,
+          "target": "today",
+          "matches": [
+            72
+          ],
+          "all_fragments": [
+            72
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.989,
+          "start_offset_ms": 18,
+          "end_offset_ms": 120
+        },
+        {
+          "id": 60,
+          "target": "hello",
+          "matches": [
+            73
+          ],
+          "all_fragments": [
+            73
+          ],
+          "merged_with": [],
+          "pending_at_window_end": false,
+          "span_coverage": 0.986,
+          "start_offset_ms": 17,
+          "end_offset_ms": 121
+        }
+      ],
+      "warning": "Matches are segments with at least 4 points (the app commit minimum). Span/offsets are relative to intention markers, not physical contact."
+    },
+    "cadence_12fps": {
+      "0": {
+        "n": 23,
+        "missed": 0,
+        "multiple": 0,
+        "merged_words": 0,
+        "pending_words": 0,
+        "single_80pct_span": 23
+      },
+      "0.041666666666666664": {
+        "n": 23,
+        "missed": 0,
+        "multiple": 0,
+        "merged_words": 0,
+        "pending_words": 0,
+        "single_80pct_span": 23
+      }
+    }
+  }
+}

@@ -1,0 +1,1303 @@
+{
+  "scores": {
+    "old_sitting_development": {
+      "n": 20,
+      "decoded": 20,
+      "top1": 18,
+      "top4": 20
+    },
+    "old_sitting_recheck": {
+      "n": 15,
+      "decoded": 12,
+      "top1": 11,
+      "top4": 11
+    },
+    "old_standing_development": {
+      "n": 25,
+      "decoded": 24,
+      "top1": 20,
+      "top4": 22
+    },
+    "old_standing_recheck": {
+      "n": 14,
+      "decoded": 11,
+      "top1": 10,
+      "top4": 11
+    },
+    "new_standing_development": {
+      "n": 23,
+      "decoded": 23,
+      "top1": 23,
+      "top4": 23
+    },
+    "new_standing_recheck": {
+      "n": 15,
+      "decoded": 15,
+      "top1": 11,
+      "top4": 14
+    }
+  },
+  "predictions": [
+    {
+      "id": "old_sitting_development_20",
+      "group": "old_sitting_development",
+      "target": "thanks",
+      "trial_id": 20,
+      "predictions": [
+        "thanks",
+        "thinks",
+        "tanks",
+        "hans"
+      ]
+    },
+    {
+      "id": "old_sitting_development_21",
+      "group": "old_sitting_development",
+      "target": "window",
+      "trial_id": 21,
+      "predictions": [
+        "window",
+        "windows",
+        "widow",
+        "snow"
+      ]
+    },
+    {
+      "id": "old_sitting_development_22",
+      "group": "old_sitting_development",
+      "target": "computer",
+      "trial_id": 22,
+      "predictions": [
+        "computer",
+        "computers",
+        "compete",
+        "composer"
+      ]
+    },
+    {
+      "id": "old_sitting_development_23",
+      "group": "old_sitting_development",
+      "target": "typing",
+      "trial_id": 23,
+      "predictions": [
+        "typing",
+        "ring",
+        "going",
+        "thing"
+      ]
+    },
+    {
+      "id": "old_sitting_development_24",
+      "group": "old_sitting_development",
+      "target": "again",
+      "trial_id": 24,
+      "predictions": [
+        "again",
+        "aging",
+        "washing",
+        "saving"
+      ]
+    },
+    {
+      "id": "old_sitting_development_25",
+      "group": "old_sitting_development",
+      "target": "small",
+      "trial_id": 25,
+      "predictions": [
+        "small",
+        "sack",
+        "walk",
+        "ask"
+      ]
+    },
+    {
+      "id": "old_sitting_development_26",
+      "group": "old_sitting_development",
+      "target": "happy",
+      "trial_id": 26,
+      "predictions": [
+        "happy",
+        "hay",
+        "happily",
+        "gay"
+      ]
+    },
+    {
+      "id": "old_sitting_development_27",
+      "group": "old_sitting_development",
+      "target": "book",
+      "trial_id": 27,
+      "predictions": [
+        "book",
+        "bo",
+        "boo",
+        "b"
+      ]
+    },
+    {
+      "id": "old_sitting_development_28",
+      "group": "old_sitting_development",
+      "target": "room",
+      "trial_id": 28,
+      "predictions": [
+        "ron",
+        "room",
+        "rim",
+        "tom"
+      ]
+    },
+    {
+      "id": "old_sitting_development_29",
+      "group": "old_sitting_development",
+      "target": "today",
+      "trial_id": 29,
+      "predictions": [
+        "today",
+        "thursday",
+        "day",
+        "holiday"
+      ]
+    },
+    {
+      "id": "old_sitting_development_30",
+      "group": "old_sitting_development",
+      "target": "hello",
+      "trial_id": 30,
+      "predictions": [
+        "hello",
+        "hell",
+        "help",
+        "hey"
+      ]
+    },
+    {
+      "id": "old_sitting_development_31",
+      "group": "old_sitting_development",
+      "target": "little",
+      "trial_id": 31,
+      "predictions": [
+        "little",
+        "lie",
+        "pile",
+        "ie"
+      ]
+    },
+    {
+      "id": "old_sitting_development_32",
+      "group": "old_sitting_development",
+      "target": "please",
+      "trial_id": 32,
+      "predictions": [
+        "please",
+        "pleased",
+        "lease",
+        "plea"
+      ]
+    },
+    {
+      "id": "old_sitting_development_33",
+      "group": "old_sitting_development",
+      "target": "night",
+      "trial_id": 33,
+      "predictions": [
+        "night",
+        "might",
+        "nights",
+        "tight"
+      ]
+    },
+    {
+      "id": "old_sitting_development_34",
+      "group": "old_sitting_development",
+      "target": "is",
+      "trial_id": 34,
+      "predictions": [
+        "is",
+        "his",
+        "ids",
+        "us"
+      ]
+    },
+    {
+      "id": "old_sitting_development_35",
+      "group": "old_sitting_development",
+      "target": "there",
+      "trial_id": 35,
+      "predictions": [
+        "there",
+        "here",
+        "theres",
+        "thee"
+      ]
+    },
+    {
+      "id": "old_sitting_development_36",
+      "group": "old_sitting_development",
+      "target": "his",
+      "trial_id": 36,
+      "predictions": [
+        "his",
+        "this",
+        "hits",
+        "hips"
+      ]
+    },
+    {
+      "id": "old_sitting_development_37",
+      "group": "old_sitting_development",
+      "target": "good",
+      "trial_id": 37,
+      "predictions": [
+        "good",
+        "god",
+        "gold",
+        "goods"
+      ]
+    },
+    {
+      "id": "old_sitting_development_38",
+      "group": "old_sitting_development",
+      "target": "world",
+      "trial_id": 38,
+      "predictions": [
+        "world",
+        "word",
+        "worlds",
+        "would"
+      ]
+    },
+    {
+      "id": "old_sitting_development_39",
+      "group": "old_sitting_development",
+      "target": "look",
+      "trial_id": 39,
+      "predictions": [
+        "hook",
+        "look",
+        "book",
+        "took"
+      ]
+    },
+    {
+      "id": "old_sitting_recheck_40",
+      "group": "old_sitting_recheck",
+      "target": "home",
+      "trial_id": 40,
+      "predictions": [
+        "home",
+        "homes",
+        "homer",
+        "come"
+      ]
+    },
+    {
+      "id": "old_sitting_recheck_41",
+      "group": "old_sitting_recheck",
+      "target": "work",
+      "trial_id": 41,
+      "predictions": [
+        "work",
+        "worn",
+        "fork",
+        "works"
+      ]
+    },
+    {
+      "id": "old_sitting_recheck_42",
+      "group": "old_sitting_recheck",
+      "target": "water",
+      "trial_id": 42,
+      "predictions": [
+        "water",
+        "ate",
+        "waters",
+        "waste"
+      ]
+    },
+    {
+      "id": "old_sitting_recheck_44",
+      "group": "old_sitting_recheck",
+      "target": "light",
+      "trial_id": 44,
+      "predictions": [
+        "light",
+        "high",
+        "flight",
+        "night"
+      ]
+    },
+    {
+      "id": "old_sitting_recheck_45",
+      "group": "old_sitting_recheck",
+      "target": "right",
+      "trial_id": 45,
+      "predictions": [
+        "right",
+        "tight",
+        "roof",
+        "eight"
+      ]
+    },
+    {
+      "id": "old_sitting_recheck_46",
+      "group": "old_sitting_recheck",
+      "target": "left",
+      "trial_id": 46,
+      "predictions": [
+        "left",
+        "let",
+        "lowest",
+        "least"
+      ]
+    },
+    {
+      "id": "old_sitting_recheck_48",
+      "group": "old_sitting_recheck",
+      "target": "school",
+      "trial_id": 48,
+      "predictions": [
+        "col",
+        "co",
+        "sci",
+        "so"
+      ]
+    },
+    {
+      "id": "old_sitting_recheck_49",
+      "group": "old_sitting_recheck",
+      "target": "morning",
+      "trial_id": 49,
+      "predictions": [
+        "morning",
+        "mining",
+        "inning",
+        "boring"
+      ]
+    },
+    {
+      "id": "old_sitting_recheck_50",
+      "group": "old_sitting_recheck",
+      "target": "thanks",
+      "trial_id": 50,
+      "predictions": [
+        "thanks",
+        "hans",
+        "hands",
+        "tanks"
+      ]
+    },
+    {
+      "id": "old_sitting_recheck_51",
+      "group": "old_sitting_recheck",
+      "target": "window",
+      "trial_id": 51,
+      "predictions": [
+        "window",
+        "windows",
+        "widow",
+        "dow"
+      ]
+    },
+    {
+      "id": "old_sitting_recheck_52",
+      "group": "old_sitting_recheck",
+      "target": "computer",
+      "trial_id": 52,
+      "predictions": [
+        "computer",
+        "compete",
+        "cooper",
+        "computers"
+      ]
+    },
+    {
+      "id": "old_sitting_recheck_54",
+      "group": "old_sitting_recheck",
+      "target": "again",
+      "trial_id": 54,
+      "predictions": [
+        "again",
+        "afghan",
+        "shah",
+        "ah"
+      ]
+    },
+    {
+      "id": "old_standing_development_24",
+      "group": "old_standing_development",
+      "target": "again",
+      "trial_id": 24,
+      "predictions": [
+        "again",
+        "washing",
+        "saying",
+        "aging"
+      ]
+    },
+    {
+      "id": "old_standing_development_25",
+      "group": "old_standing_development",
+      "target": "small",
+      "trial_id": 25,
+      "predictions": [
+        "small",
+        "sally",
+        "mall",
+        "shall"
+      ]
+    },
+    {
+      "id": "old_standing_development_26",
+      "group": "old_standing_development",
+      "target": "happy",
+      "trial_id": 26,
+      "predictions": [
+        "happy",
+        "hay",
+        "happily",
+        "gay"
+      ]
+    },
+    {
+      "id": "old_standing_development_27",
+      "group": "old_standing_development",
+      "target": "book",
+      "trial_id": 27,
+      "predictions": [
+        "book",
+        "boom",
+        "boot",
+        "big"
+      ]
+    },
+    {
+      "id": "old_standing_development_28",
+      "group": "old_standing_development",
+      "target": "room",
+      "trial_id": 28,
+      "predictions": [
+        "ron",
+        "tom",
+        "rim",
+        "rome"
+      ]
+    },
+    {
+      "id": "old_standing_development_29",
+      "group": "old_standing_development",
+      "target": "today",
+      "trial_id": 29,
+      "predictions": [
+        "today",
+        "day",
+        "friday",
+        "tuesday"
+      ]
+    },
+    {
+      "id": "old_standing_development_30",
+      "group": "old_standing_development",
+      "target": "hello",
+      "trial_id": 30,
+      "predictions": [
+        "hello",
+        "hell",
+        "help",
+        "hey"
+      ]
+    },
+    {
+      "id": "old_standing_development_31",
+      "group": "old_standing_development",
+      "target": "little",
+      "trial_id": 31,
+      "predictions": [
+        "little",
+        "pole",
+        "pile",
+        "le"
+      ]
+    },
+    {
+      "id": "old_standing_development_32",
+      "group": "old_standing_development",
+      "target": "please",
+      "trial_id": 32,
+      "predictions": [
+        "please",
+        "pleased",
+        "lease",
+        "peace"
+      ]
+    },
+    {
+      "id": "old_standing_development_33",
+      "group": "old_standing_development",
+      "target": "night",
+      "trial_id": 33,
+      "predictions": [
+        "night",
+        "fight",
+        "tight",
+        "might"
+      ]
+    },
+    {
+      "id": "old_standing_development_34",
+      "group": "old_standing_development",
+      "target": "is",
+      "trial_id": 34,
+      "predictions": [
+        "his",
+        "is",
+        "this",
+        "ios"
+      ]
+    },
+    {
+      "id": "old_standing_development_35",
+      "group": "old_standing_development",
+      "target": "there",
+      "trial_id": 35,
+      "predictions": [
+        "there",
+        "theres",
+        "thee",
+        "the"
+      ]
+    },
+    {
+      "id": "old_standing_development_36",
+      "group": "old_standing_development",
+      "target": "his",
+      "trial_id": 36,
+      "predictions": [
+        "his",
+        "this",
+        "hid",
+        "hits"
+      ]
+    },
+    {
+      "id": "old_standing_development_37",
+      "group": "old_standing_development",
+      "target": "good",
+      "trial_id": 37,
+      "predictions": [
+        "good",
+        "god",
+        "goods",
+        "gold"
+      ]
+    },
+    {
+      "id": "old_standing_development_38",
+      "group": "old_standing_development",
+      "target": "world",
+      "trial_id": 38,
+      "predictions": [
+        "world",
+        "worlds",
+        "word",
+        "would"
+      ]
+    },
+    {
+      "id": "old_standing_development_39",
+      "group": "old_standing_development",
+      "target": "look",
+      "trial_id": 39,
+      "predictions": [
+        "look",
+        "hook",
+        "book",
+        "took"
+      ]
+    },
+    {
+      "id": "old_standing_development_40",
+      "group": "old_standing_development",
+      "target": "home",
+      "trial_id": 40,
+      "predictions": [
+        "home",
+        "homes",
+        "homer",
+        "come"
+      ]
+    },
+    {
+      "id": "old_standing_development_41",
+      "group": "old_standing_development",
+      "target": "work",
+      "trial_id": 41,
+      "predictions": [
+        "works",
+        "world",
+        "worked",
+        "working"
+      ]
+    },
+    {
+      "id": "old_standing_development_42",
+      "group": "old_standing_development",
+      "target": "water",
+      "trial_id": 42,
+      "predictions": [
+        "water",
+        "waters",
+        "ate",
+        "waste"
+      ]
+    },
+    {
+      "id": "old_standing_development_43",
+      "group": "old_standing_development",
+      "target": "paper",
+      "trial_id": 43,
+      "predictions": [
+        "paper",
+        "papers",
+        "par",
+        "pair"
+      ]
+    },
+    {
+      "id": "old_standing_development_44",
+      "group": "old_standing_development",
+      "target": "light",
+      "trial_id": 44,
+      "predictions": [
+        "flight",
+        "light",
+        "tight",
+        "fight"
+      ]
+    },
+    {
+      "id": "old_standing_development_45",
+      "group": "old_standing_development",
+      "target": "right",
+      "trial_id": 45,
+      "predictions": [
+        "right",
+        "eight",
+        "tight",
+        "fight"
+      ]
+    },
+    {
+      "id": "old_standing_development_46",
+      "group": "old_standing_development",
+      "target": "left",
+      "trial_id": 46,
+      "predictions": [
+        "left",
+        "let",
+        "yet",
+        "get"
+      ]
+    },
+    {
+      "id": "old_standing_development_47",
+      "group": "old_standing_development",
+      "target": "people",
+      "trial_id": 47,
+      "predictions": [
+        "people",
+        "peoples",
+        "pole",
+        "pope"
+      ]
+    },
+    {
+      "id": "old_standing_recheck_51",
+      "group": "old_standing_recheck",
+      "target": "window",
+      "trial_id": 51,
+      "predictions": [
+        "window",
+        "windows",
+        "widow",
+        "snow"
+      ]
+    },
+    {
+      "id": "old_standing_recheck_52",
+      "group": "old_standing_recheck",
+      "target": "computer",
+      "trial_id": 52,
+      "predictions": [
+        "computer",
+        "computers",
+        "come",
+        "composer"
+      ]
+    },
+    {
+      "id": "old_standing_recheck_53",
+      "group": "old_standing_recheck",
+      "target": "typing",
+      "trial_id": 53,
+      "predictions": [
+        "typing",
+        "ring",
+        "ruling",
+        "rolling"
+      ]
+    },
+    {
+      "id": "old_standing_recheck_54",
+      "group": "old_standing_recheck",
+      "target": "again",
+      "trial_id": 54,
+      "predictions": [
+        "saying",
+        "again",
+        "aging",
+        "staying"
+      ]
+    },
+    {
+      "id": "old_standing_recheck_55",
+      "group": "old_standing_recheck",
+      "target": "small",
+      "trial_id": 55,
+      "predictions": [
+        "small",
+        "shall",
+        "mall",
+        "sally"
+      ]
+    },
+    {
+      "id": "old_standing_recheck_58",
+      "group": "old_standing_recheck",
+      "target": "room",
+      "trial_id": 58,
+      "predictions": [
+        "room",
+        "ron",
+        "tom",
+        "ton"
+      ]
+    },
+    {
+      "id": "old_standing_recheck_59",
+      "group": "old_standing_recheck",
+      "target": "today",
+      "trial_id": 59,
+      "predictions": [
+        "today",
+        "day",
+        "todd",
+        "friday"
+      ]
+    },
+    {
+      "id": "old_standing_recheck_60",
+      "group": "old_standing_recheck",
+      "target": "hello",
+      "trial_id": 60,
+      "predictions": [
+        "hello",
+        "helping",
+        "hell",
+        "helen"
+      ]
+    },
+    {
+      "id": "old_standing_recheck_61",
+      "group": "old_standing_recheck",
+      "target": "little",
+      "trial_id": 61,
+      "predictions": [
+        "little",
+        "lie",
+        "hitler",
+        "like"
+      ]
+    },
+    {
+      "id": "old_standing_recheck_62",
+      "group": "old_standing_recheck",
+      "target": "please",
+      "trial_id": 62,
+      "predictions": [
+        "please",
+        "lease",
+        "pleased",
+        "plea"
+      ]
+    },
+    {
+      "id": "old_standing_recheck_63",
+      "group": "old_standing_recheck",
+      "target": "night",
+      "trial_id": 63,
+      "predictions": [
+        "night",
+        "might",
+        "fight",
+        "light"
+      ]
+    },
+    {
+      "id": "new_standing_development_22",
+      "group": "new_standing_development",
+      "target": "computer",
+      "trial_id": 22,
+      "predictions": [
+        "computer",
+        "computers",
+        "composer",
+        "compete"
+      ]
+    },
+    {
+      "id": "new_standing_development_23",
+      "group": "new_standing_development",
+      "target": "typing",
+      "trial_id": 23,
+      "predictions": [
+        "typing",
+        "thing",
+        "going",
+        "young"
+      ]
+    },
+    {
+      "id": "new_standing_development_24",
+      "group": "new_standing_development",
+      "target": "again",
+      "trial_id": 24,
+      "predictions": [
+        "again",
+        "gain",
+        "aging",
+        "alan"
+      ]
+    },
+    {
+      "id": "new_standing_development_25",
+      "group": "new_standing_development",
+      "target": "small",
+      "trial_id": 25,
+      "predictions": [
+        "small",
+        "mall",
+        "email",
+        "all"
+      ]
+    },
+    {
+      "id": "new_standing_development_26",
+      "group": "new_standing_development",
+      "target": "happy",
+      "trial_id": 26,
+      "predictions": [
+        "happy",
+        "hat",
+        "hay",
+        "halt"
+      ]
+    },
+    {
+      "id": "new_standing_development_27",
+      "group": "new_standing_development",
+      "target": "book",
+      "trial_id": 27,
+      "predictions": [
+        "book",
+        "hook",
+        "cook",
+        "boom"
+      ]
+    },
+    {
+      "id": "new_standing_development_28",
+      "group": "new_standing_development",
+      "target": "room",
+      "trial_id": 28,
+      "predictions": [
+        "room",
+        "tom",
+        "ron",
+        "rim"
+      ]
+    },
+    {
+      "id": "new_standing_development_29",
+      "group": "new_standing_development",
+      "target": "today",
+      "trial_id": 29,
+      "predictions": [
+        "today",
+        "day",
+        "friday",
+        "tuesday"
+      ]
+    },
+    {
+      "id": "new_standing_development_30",
+      "group": "new_standing_development",
+      "target": "hello",
+      "trial_id": 30,
+      "predictions": [
+        "hello",
+        "hell",
+        "help",
+        "ho"
+      ]
+    },
+    {
+      "id": "new_standing_development_31",
+      "group": "new_standing_development",
+      "target": "little",
+      "trial_id": 31,
+      "predictions": [
+        "little",
+        "le",
+        "lie",
+        "ie"
+      ]
+    },
+    {
+      "id": "new_standing_development_32",
+      "group": "new_standing_development",
+      "target": "please",
+      "trial_id": 32,
+      "predictions": [
+        "please",
+        "pleased",
+        "lease",
+        "peace"
+      ]
+    },
+    {
+      "id": "new_standing_development_33",
+      "group": "new_standing_development",
+      "target": "night",
+      "trial_id": 33,
+      "predictions": [
+        "night",
+        "might",
+        "nights",
+        "fight"
+      ]
+    },
+    {
+      "id": "new_standing_development_34",
+      "group": "new_standing_development",
+      "target": "is",
+      "trial_id": 34,
+      "predictions": [
+        "is",
+        "his",
+        "ids",
+        "us"
+      ]
+    },
+    {
+      "id": "new_standing_development_35",
+      "group": "new_standing_development",
+      "target": "there",
+      "trial_id": 35,
+      "predictions": [
+        "there",
+        "theres",
+        "here",
+        "thee"
+      ]
+    },
+    {
+      "id": "new_standing_development_36",
+      "group": "new_standing_development",
+      "target": "his",
+      "trial_id": 36,
+      "predictions": [
+        "his",
+        "is",
+        "hips",
+        "hits"
+      ]
+    },
+    {
+      "id": "new_standing_development_37",
+      "group": "new_standing_development",
+      "target": "good",
+      "trial_id": 37,
+      "predictions": [
+        "good",
+        "god",
+        "goods",
+        "gold"
+      ]
+    },
+    {
+      "id": "new_standing_development_38",
+      "group": "new_standing_development",
+      "target": "world",
+      "trial_id": 38,
+      "predictions": [
+        "world",
+        "worlds",
+        "word",
+        "worked"
+      ]
+    },
+    {
+      "id": "new_standing_development_39",
+      "group": "new_standing_development",
+      "target": "look",
+      "trial_id": 39,
+      "predictions": [
+        "look",
+        "hook",
+        "ok",
+        "lo"
+      ]
+    },
+    {
+      "id": "new_standing_development_40",
+      "group": "new_standing_development",
+      "target": "home",
+      "trial_id": 40,
+      "predictions": [
+        "home",
+        "homes",
+        "time",
+        "hike"
+      ]
+    },
+    {
+      "id": "new_standing_development_41",
+      "group": "new_standing_development",
+      "target": "work",
+      "trial_id": 41,
+      "predictions": [
+        "work",
+        "worn",
+        "fork",
+        "works"
+      ]
+    },
+    {
+      "id": "new_standing_development_42",
+      "group": "new_standing_development",
+      "target": "water",
+      "trial_id": 42,
+      "predictions": [
+        "water",
+        "waters",
+        "ate",
+        "waste"
+      ]
+    },
+    {
+      "id": "new_standing_development_43",
+      "group": "new_standing_development",
+      "target": "paper",
+      "trial_id": 43,
+      "predictions": [
+        "paper",
+        "papers",
+        "par",
+        "pair"
+      ]
+    },
+    {
+      "id": "new_standing_development_44",
+      "group": "new_standing_development",
+      "target": "light",
+      "trial_id": 44,
+      "predictions": [
+        "light",
+        "flight",
+        "might",
+        "fight"
+      ]
+    },
+    {
+      "id": "new_standing_recheck_46",
+      "group": "new_standing_recheck",
+      "target": "left",
+      "trial_id": 46,
+      "predictions": [
+        "left",
+        "let",
+        "jet",
+        "pet"
+      ]
+    },
+    {
+      "id": "new_standing_recheck_47",
+      "group": "new_standing_recheck",
+      "target": "people",
+      "trial_id": 47,
+      "predictions": [
+        "people",
+        "peoples",
+        "pole",
+        "pope"
+      ]
+    },
+    {
+      "id": "new_standing_recheck_48",
+      "group": "new_standing_recheck",
+      "target": "school",
+      "trial_id": 48,
+      "predictions": [
+        "soil",
+        "chill",
+        "sail",
+        "school"
+      ]
+    },
+    {
+      "id": "new_standing_recheck_49",
+      "group": "new_standing_recheck",
+      "target": "morning",
+      "trial_id": 49,
+      "predictions": [
+        "morning",
+        "burning",
+        "mining",
+        "boring"
+      ]
+    },
+    {
+      "id": "new_standing_recheck_50",
+      "group": "new_standing_recheck",
+      "target": "thanks",
+      "trial_id": 50,
+      "predictions": [
+        "thanks",
+        "tanks",
+        "thinks",
+        "hans"
+      ]
+    },
+    {
+      "id": "new_standing_recheck_51",
+      "group": "new_standing_recheck",
+      "target": "window",
+      "trial_id": 51,
+      "predictions": [
+        "window",
+        "windows",
+        "widow",
+        "snow"
+      ]
+    },
+    {
+      "id": "new_standing_recheck_52",
+      "group": "new_standing_recheck",
+      "target": "computer",
+      "trial_id": 52,
+      "predictions": [
+        "computer",
+        "computers",
+        "compete",
+        "composer"
+      ]
+    },
+    {
+      "id": "new_standing_recheck_53",
+      "group": "new_standing_recheck",
+      "target": "typing",
+      "trial_id": 53,
+      "predictions": [
+        "typing",
+        "going",
+        "thing",
+        "hoping"
+      ]
+    },
+    {
+      "id": "new_standing_recheck_54",
+      "group": "new_standing_recheck",
+      "target": "again",
+      "trial_id": 54,
+      "predictions": [
+        "again",
+        "gain",
+        "aging",
+        "saying"
+      ]
+    },
+    {
+      "id": "new_standing_recheck_55",
+      "group": "new_standing_recheck",
+      "target": "small",
+      "trial_id": 55,
+      "predictions": [
+        "small",
+        "ask",
+        "sack",
+        "mask"
+      ]
+    },
+    {
+      "id": "new_standing_recheck_56",
+      "group": "new_standing_recheck",
+      "target": "happy",
+      "trial_id": 56,
+      "predictions": [
+        "happy",
+        "hat",
+        "tape",
+        "hay"
+      ]
+    },
+    {
+      "id": "new_standing_recheck_57",
+      "group": "new_standing_recheck",
+      "target": "book",
+      "trial_id": 57,
+      "predictions": [
+        "nm",
+        "boom",
+        "m",
+        "hm"
+      ]
+    },
+    {
+      "id": "new_standing_recheck_58",
+      "group": "new_standing_recheck",
+      "target": "room",
+      "trial_id": 58,
+      "predictions": [
+        "from",
+        "room",
+        "ron",
+        "tom"
+      ]
+    },
+    {
+      "id": "new_standing_recheck_59",
+      "group": "new_standing_recheck",
+      "target": "today",
+      "trial_id": 59,
+      "predictions": [
+        "today",
+        "day",
+        "todd",
+        "friday"
+      ]
+    },
+    {
+      "id": "new_standing_recheck_60",
+      "group": "new_standing_recheck",
+      "target": "hello",
+      "trial_id": 60,
+      "predictions": [
+        "hell",
+        "hello",
+        "help",
+        "tell"
+      ]
+    }
+  ],
+  "scope": "Exploratory re-use of same-person inspected recordings; fixed cached native30fps hand tracks. Not independent held-out accuracy."
+}

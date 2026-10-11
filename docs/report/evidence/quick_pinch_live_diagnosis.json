@@ -1,0 +1,44 @@
+{
+  "recording": "20261011_141259_f1855c",
+  "attempts": 11,
+  "recorded_outcomes": {
+    "cycle": 8,
+    "miss": 2,
+    "delete": 1
+  },
+  "visually_reviewed_attempts": [
+    1,
+    4,
+    9
+  ],
+  "held_attempt": {
+    "attempt": 1,
+    "visible_duration_approx_seconds": 0.9,
+    "delete_threshold_seconds": 0.6,
+    "interpretation": "Correct hold action; it was longer than a quick cycle pinch."
+  },
+  "missed_attempts": [
+    {
+      "attempt": 4,
+      "target": 3,
+      "reason": "Three pinch appearance scores .735-.785, but strongest below .8 and tracked gap never below .2."
+    },
+    {
+      "attempt": 9,
+      "target": 8,
+      "reason": "Strong pinch score .872; raw gap .187 just above strict .18 shortcut, no recent wide-open pose, and smoothed contact stayed off."
+    }
+  ],
+  "capture": {
+    "saved_frames": 2942,
+    "dropped_frames": 0,
+    "processed_app_frames": 1466
+  },
+  "candidate_recorded_timing_replay": {
+    "quick_cycles": 10,
+    "intended_quick_pinches": 10,
+    "correct_hold_deletes": 1,
+    "new_outside_prompt_commands": 0
+  },
+  "limits": "Recording reused to develop fix. This is replay evidence, not a fresh live accuracy measurement. Six pre-prompt commands existed before and are unchanged; they were not classified as false positives."
+}

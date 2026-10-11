@@ -1,0 +1,76 @@
+{
+  "passed": true,
+  "frames": 1466,
+  "actions": [
+    {
+      "app_t_ms": 15007,
+      "action": "next"
+    },
+    {
+      "app_t_ms": 15626,
+      "action": "next"
+    },
+    {
+      "app_t_ms": 16468,
+      "action": "next"
+    },
+    {
+      "app_t_ms": 17330,
+      "action": "next"
+    },
+    {
+      "app_t_ms": 18188,
+      "action": "next"
+    },
+    {
+      "app_t_ms": 19003,
+      "action": "next"
+    },
+    {
+      "app_t_ms": 24030,
+      "action": "delete"
+    },
+    {
+      "app_t_ms": 32707,
+      "action": "next"
+    },
+    {
+      "app_t_ms": 39359,
+      "action": "next"
+    },
+    {
+      "app_t_ms": 46174,
+      "action": "next"
+    },
+    {
+      "app_t_ms": 56294,
+      "action": "next"
+    },
+    {
+      "app_t_ms": 60961,
+      "action": "next"
+    },
+    {
+      "app_t_ms": 65614,
+      "action": "next"
+    },
+    {
+      "app_t_ms": 71995,
+      "action": "next"
+    },
+    {
+      "app_t_ms": 77400,
+      "action": "next"
+    },
+    {
+      "app_t_ms": 83608,
+      "action": "next"
+    },
+    {
+      "app_t_ms": 88393,
+      "action": "next"
+    }
+  ],
+  "main_sha256": "7f8df0661296c727dac429a2d432817f2af9dabdb92e3e14ba4023f5560c28d9",
+  "scope": "Actual app dispatch with captured live landmarks/left scores and candidate fusion; model inference, camera, right detections and decoder substituted."
+}

@@ -1,0 +1,55 @@
+% Supporting diagnostic details retained when the main report was shortened.
+
+% This is an archival text fragment, not a build target. References use the main report labels.
+
+\subsection*{Archived diagnostic detail: P071}
+We built recording tools to test the same gestures again after changing the code or model. Guided word recordings save camera frames, landmarks, intended words, and captured swipe segments. A separate benchmark mode shows the keyboard and hands without a moving cursor. Space-key markers record when the user intends to start and end a word. We use these intervals to check whether the swipe was captured. Failed attempts and retries are saved separately.
+
+\subsection*{Archived diagnostic detail: P072}
+For quick left pinches, a guided test prompts one attempt at a time. It then shows whether the app cycled a suggestion, missed the two-second response window, or triggered a hold/delete action. The user can retry a miss or mark a mistake in their own attempt. The test saves the raw camera stream and acquisition timestamps. It also saves the exact frames processed by the app, landmarks, appearance scores, and control decisions. This lets us compare the visible pinch with what the app did at that moment. Recording adds some overhead, so the measured processing rate applies to that session.
+
+\subsection*{Archived diagnostic detail: P076}
+We also recorded open-hand movement and brief or held pinches to check the controls. One follow-up contains ten pinches. The later live diagnostic has ten prompt targets and eleven attempts because the first target was retried after a long hold. Video review shows ten brief pinches and one held pinch across those attempts. The session saves 2,942 camera frames and 1,466 app decisions for failure analysis.
+
+\subsection*{Archived diagnostic detail: P080}
+The app runs on a Linux laptop with an AMD Ryzen 7 7730U, eight physical cores, 16 logical processors, and about 13 GiB of usable memory. The selected training jobs ran on Kaggle GPUs. The app uses Python 3.13, OpenCV, MediaPipe Tasks, PyTorch, NumPy/SciPy, and ONNX Runtime. Capture targets $640\times480$ images at a nominal 30 fps. The latest-frame reader lets inference run at its own rate. In the pinch diagnostic, 2,942 acquired frames span 99.264 seconds, while 1,466 processed decisions span 91.305 seconds. Using $(N-1)/(t_{\rm last}-t_{\rm first})$ gives 29.6 fps capture and 16.0 fps processing. Processing starts about 7.9 seconds after capture, so the totals cover different intervals. These figures describe the capture and processing throughput during that session.
+
+\subsection*{Archived diagnostic detail: P089}
+Figure~\ref{fig:loso} shows differences between users. Subject 9 accounts for much of the unusual clean-versus-degraded result. Its augmented-model accuracy is 44.8\% on clean input after 50 Hz preprocessing and 79.4\% under the webcam preset. Without the 50 Hz step, the saved clean-input evaluation gives 86.0\%. These numbers match the fold files. The large change points to sensitivity to timestamp-based preprocessing. Removing subject 9 gives augmented means of 91.8\% clean and 83.4\% webcam, compared with 86.6\% and 82.9\% across all nine. We keep all nine subjects in the headline results.
+
+\subsection*{Archived diagnostic detail: P090}
+SHARK2 improves from 67.8\% on clean input to 70.3\% at 30 fps and 71.6\% at 12 fps. Lower-rate interpolation changes the path before smoothing and arc-length matching. Under the webcam preset, subject 9 improves from 13.8\% to 56.7\%. The mean for the other eight subjects drops from 74.5\% to 70.6\%. Their scores become closer, which explains much of the standard-deviation drop from 20.3 to 9.1 points. Interpolation and endpoint truncation may remove troublesome observations, but the saved experiments do not separate their effects. This result applies to the preprocessing pipeline we tested.
+
+\subsection*{Archived diagnostic detail: P091}
+A separate model trained for 200 epochs on a random 95/5 split reaches 92.2\% top-1 and 97.3\% top-4 at the last epoch. We use this experiment to check the implementation with a random split instead of held-out subjects. The strongest SHARK2 baseline uses a word-frequency prior tuned on the other participants. It reaches 77.1\% under the webcam preset. The augmented decoder exceeds this by 5.8 points.
+
+\subsection*{Archived diagnostic detail: P093}
+Both pre-crop checkpoints have already been adapted to webcam data. Further continuation leaves their counts unchanged. With crop detection and the associated pinch and segmentation settings, complete captures increase from 8 to 23. This is a gain of 51.7 percentage points. The gain includes changes to cropping, detector weights, and interaction logic.
+
+\subsection*{Archived diagnostic detail: P095}
+With the earlier crop pipeline, replaying the videos at about 9.92 fps gives 22/29 complete captures, 18/29 personalized top-1, and 20/29 top-4. The native-cadence replay runs at about 29.76 fps. Both checks use the same 29 attempts. Later 8--12 fps checks use subsampled tracking outputs cached at 30 fps. These check downstream decisions at lower observation rates and supported keeping the lighting improvement.
+
+\subsection*{Archived diagnostic detail: P096}
+On the 45 older development attempts, the crop pipeline captures 44. The original decoder gives 35/45 top-1 and 41/45 top-4. Personalization raises these to 39/45 and 44/45. With the selected lighting-plus-reference pipeline, capture stays at 44/45, but the word scores are 38/45 top-1 and 42/45 top-4. The final setup keeps the original 29-attempt scores while slightly lowering the older development scores. During personalization, the fixed D1 greedy check improves from 415/512 to 423/512. We used these checks to select the checkpoint.
+
+\subsection*{Archived diagnostic detail: P099}
+\textbf{Difficult lighting and a lower viewing angle.} The earlier crop setup failed the complete-capture criterion on all 15 attempts: it missed two and split eight into multiple segments, while other traces were too short. The earliest saved detector captured three. After the additional lighting fine-tuning and reference-detector check, replay of this inspected recording captures all 15 attempts, gives 11/15 correct first suggestions, and includes the target among four suggestions on 14/15. The original 29-attempt results remain unchanged. The recording combines changed lighting with a lower viewing angle.
+
+\subsection*{Archived diagnostic detail: P100}
+\textbf{Unintended control-hand pinch.} Separated fingertips can overlap in the image and trigger a landmark-only contact rule. Requiring appearance evidence reduced unintended commands from four to zero in a 20-second seated non-pinching interval. It retained an action on 19/20 seated and 14/14 standing marked pinches. These counts combine cycle and delete actions; command correctness is assessed separately below.
+
+\subsection*{Archived diagnostic detail: P101}
+\textbf{Missed brief pinches.} The eleven-attempt diagnostic described in Section 4.1 contains ten brief pinches and one held pinch, including the retry of target 1. The app correctly cycled on eight brief pinches and deleted on the held pinch, which lasted about 0.9 seconds. It missed the other two brief pinches because neither satisfied the existing contact or fast-path rules: one had moderate appearance confidence without crossing the filtered contact threshold; the other narrowly missed a stricter gap threshold and lacked a recent wide-open pose. Figure~\ref{fig:pinchcase} shows the first miss.
+
+\subsection*{Archived diagnostic detail: P102}
+The two-observation closing-motion rule in Section~\ref{sec:pinch} recovers both misses when the recorded observations and timestamps are replayed. The result is ten cycles and one correct held delete, with action order preserved on seven older cached recordings. Replaying all 1,466 processed frames through the app gives the same actions as the isolated control logic. A fresh live check of this final control revision is still needed. The appendix identifies the archived software checks.
+
+\subsection*{Archived diagnostic detail: P103}
+A missed brief pinch from the live diagnostic (target 3, attempt 4). The upper row contains mirrored hand crops from saved camera frames. Below, recorded fingertip and appearance evidence is compared with the old and updated control decisions. Both versions use the same cached observations and timestamps; only the control logic changes. The recovered cycle is a replay result.
+
+\subsection*{Archived diagnostic detail: P125}
+The selected control change passes 15 focused software tests. Revision-specific checks are in \nolinkurl{evidence/control_validation_history.tex}, and full synthetic results are in \nolinkurl{evidence/synthetic_experiment_notes.tex}. These text fragments are supporting notes rather than build targets. The numerical audit in \nolinkurl{evidence/review_numerical_audit.json} recomputes subject-9 statistics, recording spans, retry identities, and the sampled noise grid. Per-subject prior results are archived as \nolinkurl{evidence/d1_prior_s*.json}. The earlier progression chart remains available in \nolinkurl{images/webcam_comparison.pdf}.
+
+\subsection*{Author revision of the brief-pinch diagnosis}
+\textbf{Brief pinches were missed.} Our diagnostic described in Section 4.1 contains ten brief pinches and one held pinch. The app correctly cycled on eight brief pinches and deleted on the held pinch, which lasted about 0.9 seconds. It missed the other two brief pinches because neither satisfied the existing contact or fast-path rules: one had moderate appearance confidence without crossing the filtered contact threshold, while the other narrowly missed the stricter gap threshold and lacked a recent wide-open pose. Figure~\ref{fig:pinchcase} shows the first miss.
+
