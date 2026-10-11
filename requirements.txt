@@ -1,0 +1,7 @@
+# Versions in the validated Linux environment. Install Torch with setup.py.
+numpy==2.5.3
+scipy==1.18.1
+opencv-contrib-python==5.0.0.93
+mediapipe==1.0.1
+onnxruntime==1.30.0
+wordfreq==3.1.1
