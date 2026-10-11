@@ -8,7 +8,8 @@ import time
 import cv2 as cv
 import numpy as np
 
-from .controls import ContactAppearanceGate, Candidates, OtherHandControl, SwipeSegmenter, SwipeStartBuffer, GuardedStartBuffer
+from .controls import Candidates, OtherHandControl, SwipeSegmenter, SwipeStartBuffer, GuardedStartBuffer
+from .left_pinch import FusedLeftPinch
 from .cvfpscalc import CvFpsCalc
 from .draw import draw_landmarks, draw_trace, text
 from .keyboard_ui import KeyboardOverlay
@@ -202,7 +203,7 @@ def main():
     words, last_ms = Candidates(), 0.0
     seg, other_ctl = SwipeSegmenter(release_ms=a.release_ms), OtherHandControl()
     other_release = ReleaseDelay(a.release_ms, start_votes=2)
-    other_approval = ContactAppearanceGate(a.det_start)
+    other_fused = FusedLeftPinch(a.release_ms, a.det_start)
     trace_img, trace_kb = [], []
     start_buffer = (GuardedStartBuffer(a.start_lookback_ms) if a.guarded_start
                     else SwipeStartBuffer(a.start_lookback_ms))
@@ -308,7 +309,9 @@ def main():
                 if a.other_pinch == "contact":
                     o_on = o_touch
                 elif a.other_pinch == "confirmed-contact":
-                    o_on = other_approval.update(o_touch, oh_sc, active=other_release.on)
+                    o_raw = (float(np.linalg.norm(oh.px[4] - oh.px[8]) / max(other_pinch.scale, 1e-6))
+                             if oh is not None else None)
+                    o_on = other_fused.update(o_touch, o_raw, oh_sc, t_ms)
                 elif a.pinch == "detector":
                     o_on = other_state.update(oh_sc)[0] if oh is not None else False
                 else:
@@ -328,7 +331,8 @@ def main():
                 if det is not None:
                     other_state.reset_state()
                     other_fist.reset_state()
-            o_on = other_release.update(o_on, t_ms)
+            if a.other_pinch != "confirmed-contact":
+                o_on = other_release.update(o_on, t_ms)
             action = other_ctl.update(o_on, t_ms)
             if a.fist_delete and det is not None and fist_since is not None and t_ms - fist_since >= 400 and not action:
                 action, fist_since = "delete", float("inf")
