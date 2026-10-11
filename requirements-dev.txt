@@ -1,0 +1,9 @@
+# Training, evaluation, tools and tests (versions from the validated Linux environment).
+# ultralytics is installed inside the Kaggle kernel by tools/kaggle/vision_runner.py.
+-r requirements.txt
+torch==2.14.0
+pytest==9.1.1
+matplotlib==3.11.2
+pandas==3.0.6
+pygame==2.6.1
+kaggle==2.2.4

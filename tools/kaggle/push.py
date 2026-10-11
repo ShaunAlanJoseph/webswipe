@@ -1,10 +1,11 @@
 # Upload the bundle as a private Kaggle dataset and push runs as private script kernels.
-#   python tools/kaggle/push.py bundle            # create or version shauniiitk/webswipe-bundle
+#   python tools/kaggle/push.py bundle            # create or version $KAGGLE_USERNAME/webswipe-bundle
 #   python tools/kaggle/push.py smoke             # GPU kernel webswipe-smoke
 #   python tools/kaggle/push.py train:0           # GPU kernel webswipe-train-0
 #   python tools/kaggle/push.py eval:0 --cpu --after train:0
 # Status / outputs: kaggle kernels status <id>; kaggle kernels output <id> -p <dir>
 import argparse
+import os
 import json
 import shutil
 import subprocess
@@ -13,7 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 BUILD = ROOT / "kaggle_build"
 KAGGLE = str(ROOT / ".venv/bin/kaggle")
-USER = "shauniiitk"
+USER = os.environ["KAGGLE_USERNAME"]  # same variable the kaggle CLI reads
 DATASET = f"{USER}/webswipe-bundle"
 
 

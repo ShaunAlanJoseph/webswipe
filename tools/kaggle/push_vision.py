@@ -1,5 +1,5 @@
 # Upload labelled webcam frames as a private Kaggle dataset and push vision fine-tuning runs.
-#   python tools/kaggle/push_vision.py frames s1 s2          # create or version shauniiitk/webswipe-frames
+#   python tools/kaggle/push_vision.py frames s1 s2          # create or version $KAGGLE_USERNAME/webswipe-frames
 #   python tools/kaggle/push_vision.py run smoke --cpu --smoke --folds A:s1:s2
 #   python tools/kaggle/push_vision.py run xloc --folds A:s1:s2 B:s2:s1 --imgsz 320
 # Fold syntax: name:train_sessions:test_sessions, sessions joined with '+'; empty test = final model (HaGRID val only).
@@ -15,8 +15,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 BUILD = ROOT / "kaggle_build"
 KAGGLE = str(ROOT / ".venv/bin/kaggle")
-# another account (e.g. a teammate's quota): KAGGLE_CONFIG_DIR=<dir with their access token> KAGGLE_USER=<name>
-USER = os.environ.get("KAGGLE_USER", "shauniiitk")
+# another account: KAGGLE_CONFIG_DIR=<dir with its access token> KAGGLE_USERNAME=<name>
+USER = os.environ["KAGGLE_USERNAME"]
 DATASET = f"{USER}/webswipe-frames"
 HAGRID = "innominate817/hagrid-sample-30k-384p"
 BASE = ROOT / "models/hagrid/YOLOv10n_gestures.pt"

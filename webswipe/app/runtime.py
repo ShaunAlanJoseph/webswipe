@@ -10,8 +10,7 @@ def configure_decoder(args, root=None):
     if args.mode in ('type', 'guided'):
         if args.decoder is None:
             if not args.ckpt:
-                for candidate in [root / 'checkpoints/d1_loso0_aug_last.pt',
-                                  root / '../webswipe-eval/kaggle_build/out/train-0/out/checkpoints/d1_loso0_aug_last.pt']:
+                for candidate in [root / 'checkpoints/d1_loso0_aug_last.pt']:
                     if candidate.is_file():
                         args.ckpt = str(candidate.resolve())
                         break

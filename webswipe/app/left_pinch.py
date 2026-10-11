@@ -1,5 +1,6 @@
 from webswipe.app.controls import ContactAppearanceGate, ReleaseDelay
 
+
 class FusedLeftPinch:
     """Confirmed pinch for the non-dominant hand's cycle/delete controls.
 
@@ -17,6 +18,7 @@ class FusedLeftPinch:
     timers avoid mixing unrelated release evidence. Suppress an old contact
     latch after visual release and debounce fast re-entry for 200 ms.
     """
+
     def __init__(self, release_ms=80, approval_score=.3):
         self.on = False
         self.release_ms = release_ms
@@ -61,11 +63,11 @@ class FusedLeftPinch:
             self.close_observed_at = None
         corroborated = (self.close_votes >= 2
                         and (self.last_end is None or t_ms - self.last_end >= 200))
-        strong = ((self.last_end is None or t_ms-self.last_end >= 200)
+        strong = ((self.last_end is None or t_ms - self.last_end >= 200)
                   and raw_ratio is not None and raw_ratio <= .27 and ok >= max(.8, self.approval_score)
-                  and (raw_ratio <= .18 or (self.last_open is not None and t_ms-self.last_open <= 350))
-                  and self.last_nonpinch is not None and t_ms-self.last_nonpinch <= 250)
-        legacy = self.legacy.update(self.gate.update(contact,scores,active=self.legacy.on),t_ms)
+                  and (raw_ratio <= .18 or (self.last_open is not None and t_ms - self.last_open <= 350))
+                  and self.last_nonpinch is not None and t_ms - self.last_nonpinch <= 250)
+        legacy = self.legacy.update(self.gate.update(contact, scores, active=self.legacy.on), t_ms)
         strong = strong or (corroborated and not legacy)
         if not legacy:
             self.suppress_legacy = False
@@ -88,11 +90,11 @@ class FusedLeftPinch:
         # Fast onset explicitly trusted the model; let confident release evidence
         # end it even if the tracker keeps the fingertip positions together.
         separated = raw_ratio is None or (not contact and raw_ratio > .27)
-        opened = max(scores.get('palm',0),scores.get('no_gesture',0)) >= .8 and ok < self.approval_score
+        opened = max(scores.get('palm', 0), scores.get('no_gesture', 0)) >= .8 and ok < self.approval_score
         self.geometry_since = (t_ms if self.geometry_since is None else self.geometry_since) if separated else None
         self.appearance_since = (t_ms if self.appearance_since is None else self.appearance_since) if opened else None
-        if ((self.geometry_since is not None and t_ms-self.geometry_since >= self.release_ms)
-            or (self.appearance_since is not None and t_ms-self.appearance_since >= 200)):
+        if ((self.geometry_since is not None and t_ms - self.geometry_since >= self.release_ms)
+            or (self.appearance_since is not None and t_ms - self.appearance_since >= 200)):
             self.on = False
             self.mode = None
             self.suppress_legacy = legacy
